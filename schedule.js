@@ -129,7 +129,7 @@ async function updateDayTimeWeather() {
     minute: "2-digit"
   });
 
-  els.dayType.textContent = `${dayLabel} • ${timeText} • Weather loading…`;
+  els.dayType.textContent = `${dayLabel} | ${timeText} | Weather loading…`;
 
   try {
     const url =
@@ -146,9 +146,9 @@ async function updateDayTimeWeather() {
     const high = Math.round(data.daily.temperature_2m_max[0]);
     const low = Math.round(data.daily.temperature_2m_min[0]);
 
-    els.dayType.textContent = `${dayLabel} • ${timeText} • High ${high}° / Low ${low}°`;
+    els.dayType.textContent = `${dayLabel} | ${timeText} | High ${high}° / Low ${low}°`;
   } catch (error) {
-    els.dayType.textContent = `${dayLabel} • ${timeText}`;
+    els.dayType.textContent = `${dayLabel} | ${timeText}`;
   }
 }
 
