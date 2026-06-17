@@ -6,7 +6,7 @@
   2. Edit the weekdayTasks and weekendTasks arrays.
   3. Open index.html in a browser.
   4. For two kids, duplicate this folder and change KID_NAME/tasks,
-     or use ?kid=ava / ?kid=mia and add separate configs below.
+     or use ?kid=Vlora / ?kid=mia and add separate configs below.
 
   Hosting ideas:
   - GitHub Pages
@@ -14,17 +14,17 @@
   - Netlify free tier
 */
 
-const KID_NAME = "Ava";
+const KID_NAME = "Vlora";
 
 // Optional: change by URL, example: index.html?kid=mia
 const urlKid = new URLSearchParams(window.location.search).get("kid");
 
 const schedules = {
-  ava: {
-    name: "Ava",
-    weekdayGreeting: "Good morning Ava. It is a school day.",
-    weekendGreeting: "Good morning Ava. It is the weekend.",
-    doneMessage: "Great job Ava! You are ready.",
+  Vlora: {
+    name: "Vlora",
+    weekdayGreeting: "Good morning Vlora. It is a school day.",
+    weekendGreeting: "Good morning Vlora. It is the weekend.",
+    doneMessage: "Great job Vlora! You are ready.",
     weekdayTasks: [
       { time: "7:00", icon: "🛏️", title: "Wake up", say: "Time to wake up." },
       { time: "7:05", icon: "🚽", title: "Potty", say: "Please go potty." },
@@ -70,7 +70,7 @@ const schedules = {
 };
 
 const activeKey = (urlKid || KID_NAME).toLowerCase();
-const config = schedules[activeKey] || schedules.ava;
+const config = schedules[activeKey] || schedules.Vlora;
 
 const todayKey = new Date().toISOString().slice(0, 10);
 const storageKey = `kidSchedule:${config.name}:${todayKey}`;
