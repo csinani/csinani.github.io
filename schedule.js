@@ -121,7 +121,7 @@ function speak(text) {
 }
 
 async function updateDayTimeWeather() {
-  const dayLabel = isWeekend() ? "Weekend day" : "School day";
+  const dayLabel = isWeekend() ? "🏡 Home day" : "🏫 School day";
 
   const now = new Date();
   const timeText = now.toLocaleTimeString([], {
@@ -158,7 +158,7 @@ function render() {
   const currentTask = tasks[currentIndex];
 
   els.kidName.textContent = `${config.name}'s Schedule`;
-  els.dayType.textContent = isWeekend() ? "Weekend day" : "School day | [ADD CURRENT TIME] | [ADD WEATHER]";
+  els.dayType.textContent = isWeekend() ? "Weekend day" : "School day";
   els.doneMessage.textContent = config.doneMessage;
 
   if (!currentTask) {
