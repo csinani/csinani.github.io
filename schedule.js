@@ -16,6 +16,9 @@
 
 const KID_NAME = "Vlora";
 
+const WEATHER_LAT = 35.9132;
+const WEATHER_LON = -79.0558;
+
 // Optional: change by URL, example: index.html?kid=mia
 const urlKid = new URLSearchParams(window.location.search).get("kid");
 
@@ -117,6 +120,38 @@ function speak(text) {
   window.speechSynthesis.speak(utterance);
 }
 
+async function updateDayTimeWeather() {
+  const dayLabel = isWeekend() ? "Weekend day" : "School day";
+
+  const now = new Date();
+  const timeText = now.toLocaleTimeString([], {
+    hour: "numeric",
+    minute: "2-digit"
+  });
+
+  els.dayType.textContent = `${dayLabel} • ${timeText} • Weather loading…`;
+
+  try {
+    const url =
+      `https://api.open-meteo.com/v1/forecast` +
+      `?latitude=${WEATHER_LAT}` +
+      `&longitude=${WEATHER_LON}` +
+      `&daily=temperature_2m_max,temperature_2m_min` +
+      `&temperature_unit=fahrenheit` +
+      `&timezone=auto`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const high = Math.round(data.daily.temperature_2m_max[0]);
+    const low = Math.round(data.daily.temperature_2m_min[0]);
+
+    els.dayType.textContent = `${dayLabel} • ${timeText} • High ${high}° / Low ${low}°`;
+  } catch (error) {
+    els.dayType.textContent = `${dayLabel} • ${timeText}`;
+  }
+}
+
 function render() {
   const tasks = getTasks();
   const currentIndex = getCurrentIndex(tasks);
@@ -199,3 +234,4 @@ render();
 
 // Refresh once per minute in case the day changes while the tablet is mounted.
 setInterval(render, 60_000);
+setInterval(updateDayTimeWeather, 60_000);
