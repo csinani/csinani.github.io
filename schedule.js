@@ -16,8 +16,8 @@
 
 const KID_NAME = "Vlora";
 
-const WEATHER_LAT = 35.9132;
-const WEATHER_LON = -79.0558;
+const WEATHER_LAT = 35.9229155;
+const WEATHER_LON = -78.9018444;
 
 // Optional: change by URL, example: index.html?kid=mia
 const urlKid = new URLSearchParams(window.location.search).get("kid");
