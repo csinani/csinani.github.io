@@ -123,7 +123,7 @@ function render() {
   const currentTask = tasks[currentIndex];
 
   els.kidName.textContent = `${config.name}'s Schedule`;
-  els.dayType.textContent = isWeekend() ? "Weekend day" : "School day";
+  els.dayType.textContent = isWeekend() ? "Weekend day" : "School day | [ADD CURRENT TIME] | [ADD WEATHER]";
   els.doneMessage.textContent = config.doneMessage;
 
   if (!currentTask) {
