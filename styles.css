@@ -57,6 +57,12 @@ h1 {
   color: var(--muted);
 }
 
+#topTitle {
+  margin: 8px 0 0;
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  color: var(--muted);
+}
+
 .icon-button {
   width: 84px;
   height: 84px;
