@@ -6,7 +6,7 @@
   2. Edit the weekdayTasks and weekendTasks arrays.
   3. Open index.html in a browser.
   4. For two kids, duplicate this folder and change KID_NAME/tasks,
-     or use ?kid=Vlora / ?kid=mia and add separate configs below.
+     or use ?kid=Vlora / ?kid=Nori and add separate configs below.
 
   Hosting ideas:
   - GitHub Pages
@@ -19,14 +19,14 @@ const KID_NAME = "Vlora";
 const WEATHER_LAT = 35.9229155;
 const WEATHER_LON = -78.9018444;
 
-// Optional: change by URL, example: index.html?kid=mia
+// Optional: change by URL, example: index.html?kid=Nori
 const urlKid = new URLSearchParams(window.location.search).get("kid");
 
 const schedules = {
   Vlora: {
     name: "Vlora",
     weekdayGreeting: "Good morning Vlora. It is a school day.",
-    weekendGreeting: "Good morning Vlora. It is the weekend.",
+    weekendGreeting: "Good morning Vlora. It is a stay at home day.",
     doneMessage: "Great job Vlora! You are ready.",
     weekdayTasks: [
       { time: "7:00", icon: "🛏️", title: "Wake up", say: "Time to wake up." },
@@ -47,11 +47,11 @@ const schedules = {
     ]
   },
 
-  mia: {
-    name: "Mia",
-    weekdayGreeting: "Good morning Mia. It is a school day.",
-    weekendGreeting: "Good morning Mia. It is the weekend.",
-    doneMessage: "Great job Mia! You are ready.",
+  Nori: {
+    name: "Nori",
+    weekdayGreeting: "Good morning Nori. It is a school day.",
+    weekendGreeting: "Good morning Nori. It is a stay at home day.",
+    doneMessage: "Great job Nori! You are ready.",
     weekdayTasks: [
       { time: "7:00", icon: "🛏️", title: "Wake up", say: "Time to wake up." },
       { time: "7:05", icon: "🚽", title: "Potty", say: "Please go potty." },
@@ -72,7 +72,7 @@ const schedules = {
   }
 };
 
-const activeKey = (urlKid || KID_NAME).toLowerCase();
+const activeKey = (urlKid || KID_NAME).toUpperCase();
 const config = schedules[activeKey] || schedules.Vlora;
 
 const todayKey = new Date().toISOString().slice(0, 10);
