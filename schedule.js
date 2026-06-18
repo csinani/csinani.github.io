@@ -121,7 +121,7 @@ function speak(text) {
 }
 
 async function updateDayTimeWeather() {
-  const dayLabel = isWeekend() ? "🏡 Home day" : "🏫 School day";
+  const dayLabel = isWeekend() ? "🏡 Home day" : "It's a School Day";
 
   const now = new Date();
   const timeText = now.toLocaleTimeString([], {
