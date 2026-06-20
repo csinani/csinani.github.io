@@ -29,11 +29,11 @@ const schedules = {
     weekendGreeting: "Good morning Vlora. It is a stay at home day.",
     doneMessage: "Great job Vlora! You are ready.",
     weekdayTasks: [
-      { time: "7:00", icon: "🛏️", title: "Wake up", say: "Time to wake up." },
-      { time: "7:05", icon: "🚽", title: "Potty", say: "Please go potty." },
-      { time: "7:10", icon: "🦷", title: "Brush teeth", say: "Time to brush your teeth." },
-      { time: "7:15", icon: "👕", title: "Get dressed", say: "Time to get dressed." },
-      { time: "7:25", icon: "🍳", title: "Breakfast", say: "Time for breakfast." },
+      { time: "7:00", icon: "🛏️", title: "Wake up", say: "It's time to wake up." },
+      { time: "7:05", icon: "🚽", title: "Potty", say: "It's time go potty." },
+      { time: "7:10", icon: "🦷", title: "Brush teeth", say: "It's time to brush your teeth." },
+      { time: "7:15", icon: "👕", title: "Get dressed", say: "It's time to get dressed." },
+      { time: "7:25", icon: "🍳", title: "Breakfast", say: "It's time for breakfast." },
       { time: "7:40", icon: "👟", title: "Shoes", say: "Please put on your shoes." },
       { time: "7:45", icon: "🎒", title: "Backpack", say: "Please get your backpack." }
     ],
