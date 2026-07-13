@@ -1,60 +1,91 @@
-# Kid Visual Schedule Dashboard
+# Kid Visual Schedule Dashboard v3 — Morning + Bedtime
 
-A simple visual schedule for a wall-mounted tablet.
+This version includes both morning and bedtime routines.
 
-## How to use
+## URLs
 
-1. Open `index.html` in a browser.
-2. Edit `schedule.js`.
-3. Change the names, icons, spoken phrases, and routines.
-4. For one kid, open:
+Use these URLs for each tablet:
 
-   `index.html?kid=ava`
+- `index.html?kid=vlora`
+- `index.html?kid=nori`
 
-5. For the other kid, open:
+Force a specific routine:
 
-   `index.html?kid=mia`
+- `index.html?kid=vlora&routine=morning`
+- `index.html?kid=vlora&routine=bedtime`
+- `index.html?kid=nori&routine=morning`
+- `index.html?kid=nori&routine=bedtime`
 
-## Best parts to edit
+On GitHub Pages:
 
-Inside `schedule.js`, look for:
+- `https://YOURUSERNAME.github.io/YOURREPOSITORY/?kid=vlora`
+- `https://YOURUSERNAME.github.io/YOURREPOSITORY/?kid=nori`
+
+## Automatic routine switching
+
+The app automatically switches to bedtime mode at 5 PM.
+
+To change that, edit this in `schedule.js`:
 
 ```js
-const schedules = {
-  ava: {
-    name: "Ava",
-    weekdayTasks: [
-      { time: "7:00", icon: "🛏️", title: "Wake up", say: "Time to wake up." }
-    ]
-  }
-}
+const BEDTIME_MODE_START_HOUR = 17;
 ```
 
-Each task has:
+Examples:
 
-- `time`: displayed on screen
-- `icon`: emoji or symbol
-- `title`: parent-readable label
-- `say`: what the tablet says aloud
+- `17` = 5 PM
+- `18` = 6 PM
+- `19` = 7 PM
 
-## Hosting for free
+## Editing routines
 
-You can upload this folder to:
+Open `schedule.js` and look for:
 
-- GitHub Pages
-- Cloudflare Pages
-- Netlify
+```js
+const KIDS = {
+```
 
-## Fire tablet notes
+Each child has:
 
-For a wall-mounted Fire tablet:
+```js
+weekdayTasks: []
+weekendTasks: []
+bedtimeTasks: []
+```
 
-- Keep it plugged in.
-- Set display sleep to the longest option possible.
-- Use Silk browser full screen if available.
-- Add the page to the home screen if your Fire OS version supports it.
-- Consider a kiosk browser app later if you want it locked down.
+Each task looks like:
 
-## Custom images instead of emoji
+```js
+{ time: "7:00", durationMinutes: 10, icon: "🦷", title: "Brush Teeth", say: "Let's brush teeth before bed." }
+```
 
-Put image files in an `images` folder, then replace emoji rendering with image tags in `schedule.js`.
+You can edit:
+
+- `time`
+- `durationMinutes`
+- `icon`
+- `title`
+- `say`
+
+## Progress
+
+Progress is saved separately for:
+
+- each child
+- each date
+- morning vs bedtime routine
+
+## Weather
+
+Weather uses Open-Meteo and is set to Durham, NC.
+
+## Uploading to GitHub
+
+Upload these files to the root of your repository:
+
+- `index.html`
+- `styles.css`
+- `schedule.js`
+- `README.md`
+
+Then commit changes.
