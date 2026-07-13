@@ -1,1 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!--
+    Kid Visual Schedule Dashboard
+    This file is the page structure.
+    Most editing will happen in schedule.js and styles.css.
+  -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Kid Visual Schedule</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
 
+<body>
+  <main class="app-shell">
+    <!-- Header: greeting, routine/day message, time, and weather -->
+    <header class="top-grid">
+      <section class="headline-block">
+        <p class="greeting">
+          <span id="greetingText">Good morning</span>, <span id="kidName">Vlora</span>!
+        </p>
+
+        <h1 id="dayMessage">
+          It's a <span>School Day!</span>
+        </h1>
+      </section>
+
+      <section class="info-card time-card" aria-label="Current time and date">
+        <div class="info-icon">🕘</div>
+        <div>
+          <div id="currentTime" class="info-main">6:00<span>AM</span></div>
+          <div id="currentDate" class="info-sub">Wed, May 8</div>
+        </div>
+      </section>
+
+      <section class="info-card weather-card" aria-label="Current weather">
+        <div id="weatherIcon" class="weather-icon">⛅</div>
+        <div class="weather-content">
+          <div id="currentTemp" class="weather-main">--°</div>
+          <div class="weather-sub">
+            <span>High <strong id="highTemp">--°</strong></span>
+            <span class="weather-divider">|</span>
+            <span>Low <strong id="lowTemp">--°</strong></span>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <!-- Day-of-week pills. JavaScript fills these in dynamically. -->
+    <nav id="dayPills" class="day-pills" aria-label="Days of the week"></nav>
+
+    <!-- Optional routine switcher. Useful for testing or if bedtime starts early. -->
+    <section class="routine-switcher" aria-label="Routine selector">
+      <button id="morningRoutineButton" class="routine-button" type="button">Morning</button>
+      <button id="bedtimeRoutineButton" class="routine-button" type="button">Bedtime</button>
+    </section>
+
+    <!-- Main current task card -->
+    <section class="now-card" aria-label="Current task">
+      <div class="countdown-wrap">
+        <!-- SVG circle lets us animate the progress ring. -->
+        <svg class="countdown-ring" viewBox="0 0 240 240" aria-hidden="true">
+          <circle class="ring-track" cx="120" cy="120" r="108"></circle>
+          <circle id="timerRing" class="ring-progress" cx="120" cy="120" r="108"></circle>
+        </svg>
+
+        <div class="countdown-content">
+          <div id="nowIcon" class="now-icon">🦷</div>
+          <div id="countdownTime" class="countdown-time">10:00</div>
+          <div id="countdownLabel" class="countdown-label">until this is done</div>
+        </div>
+      </div>
+
+      <div class="now-details">
+        <div id="nowBadge" class="now-badge">NOW</div>
+        <h2 id="nowTitle">Brush Teeth</h2>
+        <p id="nowHint">Let's make those smiles sparkle!</p>
+
+        <div class="action-buttons">
+          <button id="speakButton" class="action-button" type="button">
+            <span>🔊</span>
+            Say it
+          </button>
+
+          <button id="completeButton" class="action-button" type="button">
+            <span>✓</span>
+            I did it!
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Progress bar based on completed tasks -->
+    <section class="progress-strip" aria-label="Progress">
+      <div class="progress-message">⭐ You've got this!</div>
+      <div class="progress-track">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+      <div id="progressCount" class="progress-count">0 / 10</div>
+    </section>
+
+    <!-- Up Next list. JavaScript builds this list from the schedule. -->
+    <section class="list-card">
+      <h3 id="listTitle">UP NEXT</h3>
+      <div id="taskList" class="task-list"></div>
+    </section>
+  </main>
+
+  <script src="schedule.js"></script>
+</body>
+</html>
