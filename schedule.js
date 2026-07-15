@@ -66,8 +66,10 @@ const KIDS = {
 
     weekdayTasks: [
       { time: "6:00", durationMinutes: 10, icon: "🛏️", title: "Wake Up", say: "Good morning Vlora. Time to wake up." },
-      { time: "6:10", durationMinutes: 10, icon: "🦷", title: "Brush Teeth", say: "Let's make those smiles sparkle!" },
-      { time: "6:20", durationMinutes: 10, icon: "👕", title: "Get Dressed", say: "Pick out something comfy!" },
+      { time: "6:00", durationMinutes: 10, icon: "🚽", title: "Go Potty", say: "Go to the bathroom and wash your hands." },
+      { time: "6:10", durationMinutes: 10, icon: "🪥", title: "Brush Teeth", say: "Brush your teeth, clean out the sink, and wipe your mouth!" },
+      { time: "6:20", durationMinutes: 10, icon: "👕", title: "Get Dressed", say: "Get dressed and put your pajamas away!" },
+      { time: "6:10", durationMinutes: 10, icon: "🦷", title: "Brush Your Hair", say: "Brush your hair, clean out the sink, and wipe your mouth!" },
       { time: "6:30", durationMinutes: 15, icon: "🥣", title: "Breakfast", say: "Fuel your body and brain!" },
       { time: "6:45", durationMinutes: 10, icon: "🎒", title: "Backpack Check", say: "Let's make sure you have everything!" },
       { time: "6:55", durationMinutes: 5, icon: "👟", title: "Shoes On", say: "Time to put on your shoes!" },
@@ -116,12 +118,12 @@ const KIDS = {
     ],
 
     bedtimeTasks: [
-      { time: "6:30", durationMinutes: 10, icon: "🧸", title: "Clean Up Toys", say: "Time to clean up your toys." },
-      { time: "6:40", durationMinutes: 10, icon: "🛁", title: "Bath Time", say: "Time for bath." },
-      { time: "6:50", durationMinutes: 10, icon: "🧴", title: "Pajamas", say: "Please put on your pajamas." },
-      { time: "7:00", durationMinutes: 10, icon: "🦷", title: "Brush Teeth", say: "Let's brush teeth before bed." },
-      { time: "7:10", durationMinutes: 10, icon: "📚", title: "Story Time", say: "Pick a book for story time." },
-      { time: "7:20", durationMinutes: 10, icon: "🌙", title: "Lights Out", say: "Time to get cozy and rest." }
+      { time: "6:50", durationMinutes: 10, icon: "🧸", title: "Clean Up Toys", say: "Time to clean up your toys." },
+      { time: "7:00", durationMinutes: 30, icon: "🛁", title: "Bath Time", say: "Time for bath." },
+      { time: "7:30", durationMinutes: 10, icon: "🧴", title: "Pajamas", say: "Please put on your pajamas." },
+      { time: "7:40", durationMinutes: 10, icon: "🦷", title: "Brush Teeth", say: "Let's brush teeth before bed." },
+      { time: "7:50", durationMinutes: 10, icon: "📚", title: "Story Time", say: "Pick a book for story time." },
+      { time: "8:00", durationMinutes: 10, icon: "🌙", title: "Lights Out", say: "Time to get cozy and rest." }
     ]
   }
 };
@@ -305,7 +307,7 @@ function getDayMessage() {
   const routine = getActiveRoutine();
 
   if (routine === "bedtime") {
-    return "It's Bedtime Routine!";
+    return "It's Bedtime!";
   }
 
   return isSchoolDay() ? "It's a School Day!" : "It's a Stay at Home Day!";
