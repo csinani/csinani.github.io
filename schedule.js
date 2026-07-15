@@ -86,12 +86,12 @@ const KIDS = {
     ],
 
     bedtimeTasks: [
-      { time: "6:30", durationMinutes: 10, icon: "🧸", title: "Clean Up Toys", say: "Time to clean up your toys." },
-      { time: "6:40", durationMinutes: 10, icon: "🛁", title: "Bath Time", say: "Time for bath." },
-      { time: "6:50", durationMinutes: 10, icon: "🧴", title: "Pajamas", say: "Please put on your pajamas." },
-      { time: "7:00", durationMinutes: 10, icon: "🦷", title: "Brush Teeth", say: "Let's brush teeth before bed." },
-      { time: "7:10", durationMinutes: 10, icon: "📚", title: "Story Time", say: "Pick a book for story time." },
-      { time: "7:20", durationMinutes: 10, icon: "🌙", title: "Lights Out", say: "Time to get cozy and rest." }
+      { time: "18:50", durationMinutes: 10, icon: "🧸", title: "Clean Up Toys", say: "Time to clean up your toys." },
+      { time: "19:20", durationMinutes: 10, icon: "🛁", title: "Bath Time", say: "Time for bath." },
+      { time: "19:30", durationMinutes: 10, icon: "🧴", title: "Pajamas", say: "Please put on your pajamas." },
+      { time: "20:40", durationMinutes: 10, icon: "🦷", title: "Brush Teeth", say: "Let's brush teeth before bed." },
+      { time: "20:50", durationMinutes: 10, icon: "📚", title: "Story Time", say: "Pick a book for story time." },
+      { time: "20:00", durationMinutes: 10, icon: "🌙", title: "Lights Out", say: "Time to get cozy and rest." }
     ]
   },
 
@@ -557,7 +557,7 @@ function renderHeader() {
   const now = new Date();
   const message = getDayMessage();
   const emphasized = getActiveRoutine() === "bedtime"
-    ? "Bedtime Routine!"
+    ? "Bedtime!"
     : isSchoolDay()
       ? "School Day!"
       : "Stay at Home Day!";
@@ -746,7 +746,7 @@ els.speakButton.addEventListener("click", () => {
     let intro;
 
     if (getActiveRoutine() === "bedtime") {
-      intro = `Good evening ${kid.name}. It is bedtime routine.`;
+      intro = `Good evening ${kid.name}. It is bedtime.`;
     } else {
       intro = isSchoolDay()
         ? `Good morning ${kid.name}. It's a school day.`
