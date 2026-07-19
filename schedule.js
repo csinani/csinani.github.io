@@ -66,14 +66,14 @@ const KIDS = {
 
     weekdayTasks: [
       { time: "6:00", durationMinutes: 10, icon: "🛏️", title: "Wake Up", say: "Good morning Vlora. Time to wake up." },
-      { time: "6:00", durationMinutes: 10, icon: "🚽", title: "Go Potty", say: "Go to the bathroom and wash your hands." },
-      { time: "6:10", durationMinutes: 10, icon: "🪥", title: "Brush Teeth", say: "Brush your teeth, clean out the sink, and wipe your mouth!" },
-      { time: "6:20", durationMinutes: 10, icon: "👕", title: "Get Dressed", say: "Get dressed and put your pajamas away!" },
-      { time: "6:10", durationMinutes: 10, icon: "🦷", title: "Brush Your Hair", say: "Brush your hair, clean out the sink, and wipe your mouth!" },
-      { time: "6:30", durationMinutes: 15, icon: "🥣", title: "Breakfast", say: "Fuel your body and brain!" },
-      { time: "6:45", durationMinutes: 10, icon: "🎒", title: "Backpack Check", say: "Let's make sure you have everything!" },
+      { time: "6:10", durationMinutes: 5, icon: "🚽", title: "Go Potty", say: "Go to the bathroom and wash your hands." },
+      { time: "6:15", durationMinutes: 5, icon: "🪥", title: "Brush Teeth", say: "Brush your teeth, clean out the sink, and wipe your mouth!" },
+      { time: "6:20", durationMinutes: 5, icon: "👕", title: "Get Dressed", say: "Get dressed and put your pajamas away!" },
+      { time: "6:25", durationMinutes: 10, icon: "🪞", title: "Brush Your Hair", say: "Brush and do your hair!" },
+      { time: "6:35", durationMinutes: 15, icon: "🥣", title: "Breakfast", say: "Fuel your body and brain!" },
+      { time: "6:50", durationMinutes: 5, icon: "🎒", title: "Backpack Check", say: "Let's make sure you have everything!" },
       { time: "6:55", durationMinutes: 5, icon: "👟", title: "Shoes On", say: "Time to put on your shoes!" },
-      { time: "7:00", durationMinutes: 10, icon: "🚪", title: "Head Out", say: "Let's go!" }
+      { time: "7:00", durationMinutes: 10, icon: "🚪", title: "Let's Go", say: "Get in the car!" }
     ],
 
     weekendTasks: [
