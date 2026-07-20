@@ -56,41 +56,49 @@
       <button id="bedtimeRoutineButton" class="routine-button" type="button">Bedtime</button>
     </section> -->
 
-    <!-- Main current task card -->
-    <section class="now-card" aria-label="Current task">
-      <div class="countdown-wrap">
-        <!-- SVG circle lets us animate the progress ring. -->
-        <svg class="countdown-ring" viewBox="0 0 240 240" aria-hidden="true">
-          <circle class="ring-track" cx="120" cy="120" r="108"></circle>
-          <circle id="timerRing" class="ring-progress" cx="120" cy="120" r="108"></circle>
-        </svg>
-
-        <div class="countdown-content">
-          <div id="nowIcon" class="now-icon">🦷</div>
-          <div id="countdownTime" class="countdown-time">10:00</div>
-          <div id="countdownLabel" class="countdown-label">until this is done</div>
+    <section class="dashboard">
+      <!-- Main current task card -->
+      <section class="now-card" aria-label="Current task">
+        <div class="countdown-wrap">
+          <!-- SVG circle lets us animate the progress ring. -->
+          <svg class="countdown-ring" viewBox="0 0 240 240" aria-hidden="true">
+            <circle class="ring-track" cx="120" cy="120" r="108"></circle>
+            <circle id="timerRing" class="ring-progress" cx="120" cy="120" r="108"></circle>
+          </svg>
+  
+          <div class="countdown-content">
+            <div id="nowIcon" class="now-icon">🦷</div>
+            <div id="countdownTime" class="countdown-time">10:00</div>
+            <div id="countdownLabel" class="countdown-label">until this is done</div>
+          </div>
         </div>
-      </div>
-
-      <div class="now-details">
-        <div id="nowBadge" class="now-badge">NOW</div>
-        <h2 id="nowTitle">Brush Teeth</h2>
-        <p id="nowHint">Let's make those smiles sparkle!</p>
-
-        <div class="action-buttons">
-          <button id="speakButton" class="action-button" type="button">
-            <span>🔊</span>
-            Say it
-          </button>
-
-          <button id="completeButton" class="action-button" type="button">
-            <span>✓</span>
-            I did it!
-          </button>
+  
+        <div class="now-details">
+          <div id="nowBadge" class="now-badge">NOW</div>
+          <h2 id="nowTitle">Brush Teeth</h2>
+          <p id="nowHint">Let's make those smiles sparkle!</p>
+  
+          <div class="action-buttons">
+            <button id="speakButton" class="action-button" type="button">
+              <span>🔊</span>
+              Say it
+            </button>
+  
+            <button id="completeButton" class="action-button" type="button">
+              <span>✓</span>
+              I did it!
+            </button>
+          </div>
         </div>
-      </div>
+      </section>
+      
+      <!-- Up Next list. JavaScript builds this list from the schedule. -->
+      <section class="list-card">
+        <h3 id="listTitle">UP NEXT</h3>
+        <div id="taskList" class="task-list"></div>
+      </section>
     </section>
-
+      
     <!-- Progress bar based on completed tasks -->
     <section class="progress-strip" aria-label="Progress">
       <div class="progress-message">⭐ You've got this!</div>
@@ -99,12 +107,7 @@
       </div>
       <div id="progressCount" class="progress-count">0 / 10</div>
     </section>
-
-    <!-- Up Next list. JavaScript builds this list from the schedule. -->
-    <section class="list-card">
-      <h3 id="listTitle">UP NEXT</h3>
-      <div id="taskList" class="task-list"></div>
-    </section>
+    
   </main>
 
   <script src="schedule.js"></script>
