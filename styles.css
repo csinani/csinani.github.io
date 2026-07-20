@@ -69,11 +69,13 @@ body {
 }
 
 /* Header layout: text left, time/weather right */
-.top-grid {
-  display: grid;
-  grid-template-columns: 1fr 210px 240px;
-  gap: 20px;
-  align-items: start;
+.top-grid{
+  display:grid;
+  grid-template-columns:
+  1fr
+  210px
+  230px;
+  align-items:start;
 }
 
 .greeting {
@@ -81,6 +83,13 @@ body {
   color: #343743;
   font-size: clamp(1.1rem, 2.5vw, 1.45rem);
   font-weight: 700;
+}
+
+.dashboard{
+    display:grid;
+    grid-template-columns:1.8fr 1fr;
+    gap:24px;
+    margin-top:6px;
 }
 
 #dayMessage {
@@ -414,11 +423,10 @@ body.bedtime-mode .now-card {
 }
 
 /* Up next list */
-.list-card {
-  background: #fff;
-  border: 1px solid var(--soft-border);
-  border-radius: 26px;
-  padding: 18px;
+.list-card{
+    height:100%;
+    display:flex;
+    flex-direction:column;
 }
 
 .list-card h3 {
@@ -427,10 +435,9 @@ body.bedtime-mode .now-card {
   letter-spacing: -0.03em;
 }
 
-.task-list {
-  border: 1px solid var(--soft-border);
-  border-radius: 20px;
-  overflow: hidden;
+.task-list{
+    flex:1;
+    overflow:hidden;
 }
 
 .task-row {
