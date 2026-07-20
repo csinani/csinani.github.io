@@ -1,114 +1,191 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <!--
-    Kid Visual Schedule Dashboard
-    This file is the page structure.
-    Most editing will happen in schedule.js and styles.css.
-  -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
   <title>Kid Visual Schedule</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Makes the page behave more like an installed app when supported. -->
+  <meta name="theme-color" content="#ffffff">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="default"
+  >
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <main class="app-shell">
-    <!-- Header: greeting, routine/day message, time, and weather -->
-    <header class="top-grid">
-      <section class="headline-block">
-        <p class="greeting">
-          <span id="greetingText">Good morning</span>, <span id="kidName">Vlora</span>!
+  <div id="app" class="app-shell">
+
+    <header class="top-bar">
+      <section class="greeting-area" aria-labelledby="dayMessage">
+        <p id="greeting" class="greeting">
+          Good morning, Vlora!
         </p>
 
-        <h1 id="dayMessage">
-          It's a <span>School Day!</span>
+        <h1 id="dayMessage" class="day-message">
+          It's a <span class="gradient-text">School Day!</span>
         </h1>
       </section>
 
-      <section class="info-card time-card" aria-label="Current time and date">
-        <div class="info-icon">🕘</div>
-        <div>
-          <div id="currentTime" class="info-main">6:00<span>AM</span></div>
-          <div id="currentDate" class="info-sub">Wed, May 8</div>
-        </div>
-      </section>
+      <section class="status-widgets" aria-label="Date, time and weather">
+        <article class="status-card time-card">
+          <div class="status-icon" aria-hidden="true">◷</div>
 
-      <section class="info-card weather-card" aria-label="Current weather">
-        <div id="weatherIcon" class="weather-icon">⛅</div>
-        <div class="weather-content">
-          <div id="currentTemp" class="weather-main">--°</div>
-          <div class="weather-sub">
-            <span>High <strong id="highTemp">--°</strong></span>
-            <span class="weather-divider">|</span>
-            <span>Low <strong id="lowTemp">--°</strong></span>
+          <div>
+            <p id="currentTime" class="status-value">6:00 AM</p>
+            <p id="currentDate" class="status-detail">Monday, July 20</p>
           </div>
-        </div>
+        </article>
+
+        <article class="status-card weather-card">
+          <div id="weatherIcon" class="weather-icon" aria-hidden="true">
+            ⛅
+          </div>
+
+          <div>
+            <p id="currentTemperature" class="status-value">--°</p>
+
+            <p class="status-detail">
+              High
+              <span id="highTemperature" class="high-temperature">--°</span>
+
+              <span aria-hidden="true"> | </span>
+
+              Low
+              <span id="lowTemperature" class="low-temperature">--°</span>
+            </p>
+          </div>
+        </article>
       </section>
     </header>
 
-    <!-- Day-of-week pills. JavaScript fills these in dynamically. -->
-    <!--<nav id="dayPills" class="day-pills" aria-label="Days of the week"></nav> -->
+    <main class="dashboard">
+      <section
+        id="currentTaskCard"
+        class="current-task-card"
+        aria-labelledby="currentTaskTitle"
+      >
+        <div class="timer-column">
+          <div
+            id="timerRing"
+            class="timer-ring"
+            role="timer"
+            aria-live="polite"
+          >
+            <div class="timer-content">
+              <div
+                id="currentTaskIcon"
+                class="current-task-icon"
+                aria-hidden="true"
+              >
+                🪥
+              </div>
 
-    <!-- Optional routine switcher. Useful for testing or if bedtime starts early. -->
-    <!-- <section class="routine-switcher" aria-label="Routine selector">
-      <button id="morningRoutineButton" class="routine-button" type="button">Morning</button>
-      <button id="bedtimeRoutineButton" class="routine-button" type="button">Bedtime</button>
-    </section> -->
-
-    <section class="dashboard">
-      <!-- Main current task card -->
-      <section class="now-card" aria-label="Current task">
-        <div class="countdown-wrap">
-          <!-- SVG circle lets us animate the progress ring. -->
-          <svg class="countdown-ring" viewBox="0 0 240 240" aria-hidden="true">
-            <circle class="ring-track" cx="120" cy="120" r="108"></circle>
-            <circle id="timerRing" class="ring-progress" cx="120" cy="120" r="108"></circle>
-          </svg>
-  
-          <div class="countdown-content">
-            <div id="nowIcon" class="now-icon">🦷</div>
-            <div id="countdownTime" class="countdown-time">10:00</div>
-            <div id="countdownLabel" class="countdown-label">until this is done</div>
+              <p id="countdown" class="countdown">5:00</p>
+              <p id="countdownLabel" class="countdown-label">
+                remaining
+              </p>
+            </div>
           </div>
         </div>
-  
-        <div class="now-details">
-          <div id="nowBadge" class="now-badge">NOW</div>
-          <h2 id="nowTitle">Brush Teeth</h2>
-          <p id="nowHint">Let's make those smiles sparkle!</p>
-  
-          <div class="action-buttons">
-            <button id="speakButton" class="action-button" type="button">
-              <span>🔊</span>
-              Say it
+
+        <div class="task-information">
+          <span class="now-badge">NOW</span>
+
+          <h2 id="currentTaskTitle" class="current-task-title">
+            Brush Teeth
+          </h2>
+
+          <p id="currentTaskSpeech" class="current-task-speech">
+            Brush your teeth, clean out the sink, and wipe your mouth!
+          </p>
+
+          <div class="task-actions">
+            <button
+              id="sayButton"
+              class="action-button secondary-button"
+              type="button"
+            >
+              <span aria-hidden="true">🔊</span>
+              <span>Say it</span>
             </button>
-  
-            <button id="completeButton" class="action-button" type="button">
-              <span>✓</span>
-              I did it!
+
+            <button
+              id="completeButton"
+              class="action-button primary-button"
+              type="button"
+            >
+              <span aria-hidden="true">✓</span>
+              <span>I did it!</span>
             </button>
+          </div>
+
+          <div id="encouragement" class="encouragement" aria-live="polite">
+            <span class="encouragement-icon" aria-hidden="true">⭐</span>
+
+            <div>
+              <strong>You're doing amazing!</strong>
+              <p>Keep going, you've got this!</p>
+            </div>
           </div>
         </div>
       </section>
-      
-      <!-- Up Next list. JavaScript builds this list from the schedule. -->
-      <section class="list-card">
-        <h3 id="listTitle">UP NEXT</h3>
-        <div id="taskList" class="task-list"></div>
-      </section>
-    </section>
-      
-    <!-- Progress bar based on completed tasks -->
-    <section class="progress-strip" aria-label="Progress">
-      <div class="progress-message">⭐ You've got this!</div>
-      <div class="progress-track">
+
+      <aside class="up-next-card" aria-labelledby="upNextHeading">
+        <h2 id="upNextHeading" class="section-heading">UP NEXT</h2>
+
+        <div id="taskList" class="task-list">
+          <!-- Upcoming tasks are inserted here with JavaScript. -->
+        </div>
+      </aside>
+    </main>
+
+    <section class="progress-card" aria-label="Routine progress">
+      <div class="progress-label">
+        <span aria-hidden="true">🌈</span>
+        <strong id="progressTitle">Morning Routine Progress</strong>
+      </div>
+
+      <div
+        id="progressTrack"
+        class="progress-track"
+        role="progressbar"
+        aria-valuemin="0"
+        aria-valuemax="9"
+        aria-valuenow="0"
+      >
         <div id="progressFill" class="progress-fill"></div>
       </div>
-      <div id="progressCount" class="progress-count">0 / 10</div>
+
+      <strong id="progressCount" class="progress-count">0 / 9</strong>
     </section>
-    
-  </main>
+
+    <button
+      id="fullscreenButton"
+      class="fullscreen-button"
+      type="button"
+      aria-label="Open dashboard in full screen"
+    >
+      ⛶
+      <span>Full screen</span>
+    </button>
+
+    <div
+      id="celebration"
+      class="celebration"
+      aria-hidden="true"
+    ></div>
+  </div>
 
   <script src="schedule.js"></script>
 </body>
