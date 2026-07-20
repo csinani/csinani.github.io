@@ -239,15 +239,16 @@ body {
 }
 
 /* Current task hero card */
+
 .now-card {
-  min-height: 360px;
-  padding: clamp(24px, 4vw, 42px);
-  border-radius: var(--radius-xl);
-  background: var(--hero-gradient);
-  display: grid;
-  grid-template-columns: minmax(250px, 340px) 1fr;
-  align-items: center;
-  gap: clamp(30px, 5vw, 58px);
+    display:grid;
+    grid-template-columns: 1.8fr 1fr;
+    gap:24px;
+    align-items:stretch;
+    padding:24px;
+    border-radius:32px;
+    background:var(--hero-gradient);
+    min-height:540px;
 }
 
 body.bedtime-mode .now-card {
