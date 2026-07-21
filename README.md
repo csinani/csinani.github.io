@@ -9,4 +9,4 @@ Upload these files to the root of your GitHub Pages repository:
 
 Then commit the changes, wait about one minute, and hard-refresh the live site.
 
-Weather is currently set to Detroit coordinates in `schedule.js`.
+Weather is currently set to Durham, NC coordinates in `schedule.js`.
