@@ -68,3 +68,64 @@ button { font:inherit; }
 @keyframes taskPop { from { transform:scale(.985); opacity:.75; } to { transform:scale(1); opacity:1; } }
 @media (max-width: 980px) { .top-bar { flex-direction:column; } .status-widgets { width:100%; justify-content:flex-start; } .dashboard { grid-template-columns:1fr; } .current-task-card { grid-template-columns:1fr; } .timer-ring { width:min(58vw,290px); } }
 @media (max-width: 640px) { .app-shell { padding:16px; } .status-card { min-width:0; flex:1 1 220px; } .current-task-card { padding:24px; } .progress-card { grid-template-columns:1fr; } .fullscreen-button span { display:none; } }
+
+/* Fire tablet landscape fit */
+@media (max-height: 700px) and (orientation: landscape) {
+  .app-shell {
+    min-height: 100vh;
+    padding: 14px 18px 12px;
+    gap: 10px;
+  }
+
+  .top-bar {
+    margin-bottom: 6px;
+  }
+
+  .dashboard {
+    min-height: 0;
+    height: calc(100vh - 150px);
+    gap: 12px;
+  }
+
+  .current-task-card,
+  .up-next-card {
+    min-height: 0;
+    height: 100%;
+    padding: 18px;
+  }
+
+  .timer-ring {
+    width: min(29vh, 230px);
+    height: min(29vh, 230px);
+  }
+
+  .current-task-title {
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
+  }
+
+  .current-task-speech {
+    margin: 4px 0 10px;
+  }
+
+  .task-actions {
+    margin-top: 8px;
+  }
+
+  .encouragement {
+    margin-top: 10px;
+    padding: 10px 14px;
+  }
+
+  .progress-card {
+    position: relative;
+    z-index: 5;
+    margin-top: 0;
+    padding: 10px 14px;
+    min-height: 54px;
+  }
+
+  .fullscreen-button {
+    bottom: 14px;
+    right: 18px;
+  }
+}
