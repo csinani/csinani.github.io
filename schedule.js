@@ -3,8 +3,8 @@
 const APP_CONFIG = {
   childName: "Vlora",
   upcomingTaskLimit: 5,
-  weatherLatitude: 42.3314,
-  weatherLongitude: -83.0458
+  weatherLatitude: 35.9940,
+  weatherLongitude: -78.8986
 };
 
 const SCHEDULES = {
