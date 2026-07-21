@@ -43,7 +43,8 @@ const el = {
   weatherIcon: $("weatherIcon"), currentTemperature: $("currentTemperature"), highTemperature: $("highTemperature"), lowTemperature: $("lowTemperature"),
   currentTaskCard: $("currentTaskCard"), timerRing: $("timerRing"), currentTaskIcon: $("currentTaskIcon"), countdown: $("countdown"), countdownLabel: $("countdownLabel"),
   currentTaskTitle: $("currentTaskTitle"), currentTaskSpeech: $("currentTaskSpeech"), sayButton: $("sayButton"), completeButton: $("completeButton"), encouragement: $("encouragement"),
-  taskList: $("taskList"), progressTitle: $("progressTitle"), progressTrack: $("progressTrack"), progressFill: $("progressFill"), progressCount: $("progressCount"),
+  taskList: $("taskList"),
+completedTaskList: $("completedTaskList"),progressTitle: $("progressTitle"), progressTrack: $("progressTrack"), progressFill: $("progressFill"), progressCount: $("progressCount"),
   fullscreenButton: $("fullscreenButton"), celebration: $("celebration")
 };
 
@@ -105,6 +106,9 @@ function currentTaskIndex(d) {
 function renderCurrent(d) {
   const i = currentTaskIndex(d);
   const task = state.tasks[i];
+  for (let x = 0; x < i; x++) {
+    state.completed.add(x);
+}
   state.currentIndex = i;
   const start = toMinutes(task.time)*60;
   const end = start + task.durationMinutes*60;
@@ -141,19 +145,92 @@ function renderCurrent(d) {
 }
 
 function renderUpcoming() {
-  el.taskList.innerHTML = "";
-  const start = state.currentIndex+1;
-  const items = state.tasks.slice(start,start+APP_CONFIG.upcomingTaskLimit);
-  if (!items.length) {
-    el.taskList.innerHTML = `<div class="empty-task-list"><span class="empty-task-icon">🎉</span><strong>All finished!</strong><span>Great job, ${APP_CONFIG.childName}!</span></div>`;
-    return;
-  }
-  items.forEach((task,offset)=>{
-    const item=document.createElement("div");
-    item.className="upcoming-task";
-    item.innerHTML=`<div class="upcoming-task-icon">${task.icon}</div><div class="upcoming-task-info"><strong>${task.title}</strong><span>${formatTaskTime(task.time)}</span></div><div class="upcoming-task-duration">${task.durationMinutes} min</div>`;
-    el.taskList.appendChild(item);
-  });
+
+    el.taskList.innerHTML = "";
+    el.completedTaskList.innerHTML = "";
+
+    // Remaining tasks
+    const upcoming = state.tasks.slice(
+        state.currentIndex + 1,
+        state.currentIndex + 1 + APP_CONFIG.upcomingTaskLimit
+    );
+
+    if (!upcoming.length) {
+
+        el.taskList.innerHTML = `
+            <div class="empty-task-list">
+                <span class="empty-task-icon">🎉</span>
+                <strong>All finished!</strong>
+                <span>Great job, ${APP_CONFIG.childName}!</span>
+            </div>
+        `;
+
+    } else {
+
+        upcoming.forEach(task => {
+
+            const card = document.createElement("div");
+            card.className = "upcoming-task";
+
+            card.innerHTML = `
+                <div class="upcoming-task-icon">${task.icon}</div>
+
+                <div class="upcoming-task-info">
+                    <strong>${task.title}</strong>
+                    <span>${formatTaskTime(task.time)}</span>
+                </div>
+
+                <div class="upcoming-task-duration">
+                    ${task.durationMinutes} min
+                </div>
+            `;
+
+            el.taskList.appendChild(card);
+
+        });
+
+    }
+
+    // Completed tasks
+    [...state.completed]
+        .sort((a,b)=>a-b)
+        .forEach(index => {
+
+            const task = state.tasks[index];
+
+            const card = document.createElement("div");
+            card.className = "upcoming-task completed";
+
+            card.innerHTML = `
+                <div class="upcoming-task-icon">
+                    ✓
+                </div>
+
+                <div class="upcoming-task-info">
+                    <strong>${task.title}</strong>
+                    <span>${formatTaskTime(task.time)}</span>
+                </div>
+
+                <div class="upcoming-task-duration">
+                    Done
+                </div>
+            `;
+
+            el.completedTaskList.appendChild(card);
+
+        });
+
+    if (state.completed.size === 0) {
+
+        el.completedTaskList.innerHTML = `
+            <div class="empty-task-list">
+                <span class="empty-task-icon">⭐</span>
+                <strong>No completed tasks yet</strong>
+            </div>
+        `;
+
+    }
+
 }
 
 function updateProgress() {
