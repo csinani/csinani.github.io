@@ -2,45 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover"
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Kid Visual Schedule</title>
-
-  <!-- Makes the page behave more like an installed app when supported. -->
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#f6f7fb">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="default"
-  >
-
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
   <div id="app" class="app-shell">
-
     <header class="top-bar">
       <section class="greeting-area" aria-labelledby="dayMessage">
-        <p id="greeting" class="greeting">
-          Good morning, Vlora!
-        </p>
-
-        <h1 id="dayMessage" class="day-message">
-          It's a <span class="gradient-text">School Day!</span>
-        </h1>
+        <p id="greeting" class="greeting">Good morning, Vlora!</p>
+        <h1 id="dayMessage" class="day-message">It's a <span class="gradient-text">School Day!</span></h1>
       </section>
 
       <section class="status-widgets" aria-label="Date, time and weather">
         <article class="status-card time-card">
           <div class="status-icon" aria-hidden="true">◷</div>
-
           <div>
             <p id="currentTime" class="status-value">6:00 AM</p>
             <p id="currentDate" class="status-detail">Monday, July 20</p>
@@ -48,143 +29,58 @@
         </article>
 
         <article class="status-card weather-card">
-          <div id="weatherIcon" class="weather-icon" aria-hidden="true">
-            ⛅
-          </div>
-
+          <div id="weatherIcon" class="weather-icon" aria-hidden="true">⛅</div>
           <div>
             <p id="currentTemperature" class="status-value">--°</p>
-
-            <p class="status-detail">
-              High
-              <span id="highTemperature" class="high-temperature">--°</span>
-
-              <span aria-hidden="true"> | </span>
-
-              Low
-              <span id="lowTemperature" class="low-temperature">--°</span>
-            </p>
+            <p class="status-detail">High <span id="highTemperature">--°</span> <span aria-hidden="true">|</span> Low <span id="lowTemperature">--°</span></p>
           </div>
         </article>
       </section>
     </header>
 
     <main class="dashboard">
-      <section
-        id="currentTaskCard"
-        class="current-task-card"
-        aria-labelledby="currentTaskTitle"
-      >
+      <section id="currentTaskCard" class="current-task-card" aria-labelledby="currentTaskTitle">
         <div class="timer-column">
-          <div
-            id="timerRing"
-            class="timer-ring"
-            role="timer"
-            aria-live="polite"
-          >
+          <div id="timerRing" class="timer-ring" role="timer" aria-live="polite">
             <div class="timer-content">
-              <div
-                id="currentTaskIcon"
-                class="current-task-icon"
-                aria-hidden="true"
-              >
-                🪥
-              </div>
-
+              <div id="currentTaskIcon" class="current-task-icon" aria-hidden="true">🪥</div>
               <p id="countdown" class="countdown">5:00</p>
-              <p id="countdownLabel" class="countdown-label">
-                remaining
-              </p>
+              <p id="countdownLabel" class="countdown-label">remaining</p>
             </div>
           </div>
         </div>
 
         <div class="task-information">
           <span class="now-badge">NOW</span>
-
-          <h2 id="currentTaskTitle" class="current-task-title">
-            Brush Teeth
-          </h2>
-
-          <p id="currentTaskSpeech" class="current-task-speech">
-            Brush your teeth, clean out the sink, and wipe your mouth!
-          </p>
+          <h2 id="currentTaskTitle" class="current-task-title">Brush Teeth</h2>
+          <p id="currentTaskSpeech" class="current-task-speech">Brush your teeth, clean out the sink, and wipe your mouth!</p>
 
           <div class="task-actions">
-            <button
-              id="sayButton"
-              class="action-button secondary-button"
-              type="button"
-            >
-              <span aria-hidden="true">🔊</span>
-              <span>Say it</span>
-            </button>
-
-            <button
-              id="completeButton"
-              class="action-button primary-button"
-              type="button"
-            >
-              <span aria-hidden="true">✓</span>
-              <span>I did it!</span>
-            </button>
+            <button id="sayButton" class="action-button secondary-button" type="button"><span aria-hidden="true">🔊</span><span>Say it</span></button>
+            <button id="completeButton" class="action-button primary-button" type="button"><span aria-hidden="true">✓</span><span>I did it!</span></button>
           </div>
 
           <div id="encouragement" class="encouragement" aria-live="polite">
             <span class="encouragement-icon" aria-hidden="true">⭐</span>
-
-            <div>
-              <strong>You're doing amazing!</strong>
-              <p>Keep going, you've got this!</p>
-            </div>
+            <div><strong>You're doing amazing!</strong><p>Keep going, you've got this!</p></div>
           </div>
         </div>
       </section>
 
       <aside class="up-next-card" aria-labelledby="upNextHeading">
         <h2 id="upNextHeading" class="section-heading">UP NEXT</h2>
-
-        <div id="taskList" class="task-list">
-          <!-- Upcoming tasks are inserted here with JavaScript. -->
-        </div>
+        <div id="taskList" class="task-list"></div>
       </aside>
     </main>
 
     <section class="progress-card" aria-label="Routine progress">
-      <div class="progress-label">
-        <span aria-hidden="true">🌈</span>
-        <strong id="progressTitle">Morning Routine Progress</strong>
-      </div>
-
-      <div
-        id="progressTrack"
-        class="progress-track"
-        role="progressbar"
-        aria-valuemin="0"
-        aria-valuemax="9"
-        aria-valuenow="0"
-      >
-        <div id="progressFill" class="progress-fill"></div>
-      </div>
-
+      <div class="progress-label"><span aria-hidden="true">🌈</span><strong id="progressTitle">Morning Routine Progress</strong></div>
+      <div id="progressTrack" class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="9" aria-valuenow="0"><div id="progressFill" class="progress-fill"></div></div>
       <strong id="progressCount" class="progress-count">0 / 9</strong>
     </section>
 
-    <button
-      id="fullscreenButton"
-      class="fullscreen-button"
-      type="button"
-      aria-label="Open dashboard in full screen"
-    >
-      ⛶
-      <span>Full screen</span>
-    </button>
-
-    <div
-      id="celebration"
-      class="celebration"
-      aria-hidden="true"
-    ></div>
+    <button id="fullscreenButton" class="fullscreen-button" type="button" aria-label="Open dashboard in full screen">⛶ <span>Full screen</span></button>
+    <div id="celebration" class="celebration" aria-hidden="true"></div>
   </div>
 
   <script src="schedule.js"></script>

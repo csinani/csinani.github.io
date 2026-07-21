@@ -1,10 +1,5 @@
 "use strict";
 
-/* =========================================================
-   VLORA & NORI VISUAL SCHEDULE — VERSION 2
-   SECTION 1: SETTINGS, SCHEDULES, AND PAGE ELEMENTS
-========================================================= */
-
 const APP_CONFIG = {
   childName: "Vlora",
   upcomingTaskLimit: 5,
@@ -12,698 +7,201 @@ const APP_CONFIG = {
   weatherLongitude: -83.0458
 };
 
-/* =========================================================
-   SCHEDULES
-========================================================= */
-
 const SCHEDULES = {
-  weekdayTasks: [
-    {
-      time: "6:00",
-      durationMinutes: 10,
-      icon: "🛏️",
-      title: "Wake Up",
-      say: "Good morning Vlora. Time to wake up."
-    },
-    {
-      time: "6:10",
-      durationMinutes: 5,
-      icon: "🚽",
-      title: "Go Potty",
-      say: "Go to the bathroom and wash your hands."
-    },
-    {
-      time: "6:15",
-      durationMinutes: 5,
-      icon: "🪥",
-      title: "Brush Teeth",
-      say: "Brush your teeth, clean out the sink, and wipe your mouth!"
-    },
-    {
-      time: "6:20",
-      durationMinutes: 5,
-      icon: "👕",
-      title: "Get Dressed",
-      say: "Get dressed and put your pajamas away!"
-    },
-    {
-      time: "6:25",
-      durationMinutes: 10,
-      icon: "🪞",
-      title: "Brush Your Hair",
-      say: "Brush and do your hair!"
-    },
-    {
-      time: "6:35",
-      durationMinutes: 15,
-      icon: "🥣",
-      title: "Breakfast",
-      say: "Fuel your body and brain!"
-    },
-    {
-      time: "6:50",
-      durationMinutes: 5,
-      icon: "🎒",
-      title: "Backpack Check",
-      say: "Let's make sure you have everything!"
-    },
-    {
-      time: "6:55",
-      durationMinutes: 5,
-      icon: "👟",
-      title: "Shoes On",
-      say: "Time to put on your shoes!"
-    },
-    {
-      time: "7:00",
-      durationMinutes: 10,
-      icon: "🚪",
-      title: "Let's Go",
-      say: "Get in the car!"
-    }
+  weekday: [
+    { time: "6:00", durationMinutes: 10, icon: "🛏️", title: "Wake Up", say: "Good morning Vlora. Time to wake up." },
+    { time: "6:10", durationMinutes: 5, icon: "🚽", title: "Go Potty", say: "Go to the bathroom and wash your hands." },
+    { time: "6:15", durationMinutes: 5, icon: "🪥", title: "Brush Teeth", say: "Brush your teeth, clean out the sink, and wipe your mouth!" },
+    { time: "6:20", durationMinutes: 5, icon: "👕", title: "Get Dressed", say: "Get dressed and put your pajamas away!" },
+    { time: "6:25", durationMinutes: 10, icon: "🪞", title: "Brush Your Hair", say: "Brush and do your hair!" },
+    { time: "6:35", durationMinutes: 15, icon: "🥣", title: "Breakfast", say: "Fuel your body and brain!" },
+    { time: "6:50", durationMinutes: 5, icon: "🎒", title: "Backpack Check", say: "Let's make sure you have everything!" },
+    { time: "6:55", durationMinutes: 5, icon: "👟", title: "Shoes On", say: "Time to put on your shoes!" },
+    { time: "7:00", durationMinutes: 10, icon: "🚪", title: "Let's Go", say: "Get in the car!" }
   ],
-
-  stayHomeTasks: [
-    {
-      time: "7:00",
-      durationMinutes: 15,
-      icon: "🛏️",
-      title: "Wake Up",
-      say: "Good morning Vlora. Time to wake up."
-    },
-    {
-      time: "7:15",
-      durationMinutes: 10,
-      icon: "🚽",
-      title: "Potty & Wash Hands",
-      say: "Go potty and wash your hands."
-    },
-    {
-      time: "7:25",
-      durationMinutes: 5,
-      icon: "🪥",
-      title: "Brush Teeth",
-      say: "Brush your teeth and clean the sink."
-    },
-    {
-      time: "7:30",
-      durationMinutes: 10,
-      icon: "👕",
-      title: "Get Dressed",
-      say: "Choose your clothes and put your pajamas away."
-    },
-    {
-      time: "7:40",
-      durationMinutes: 20,
-      icon: "🥣",
-      title: "Breakfast",
-      say: "Time for a healthy breakfast."
-    },
-    {
-      time: "8:00",
-      durationMinutes: 20,
-      icon: "🧸",
-      title: "Play Time",
-      say: "You may choose something fun to play."
-    }
+  stayHome: [
+    { time: "7:00", durationMinutes: 15, icon: "🛏️", title: "Wake Up", say: "Good morning Vlora. Time to wake up." },
+    { time: "7:15", durationMinutes: 10, icon: "🚽", title: "Potty & Wash Hands", say: "Go potty and wash your hands." },
+    { time: "7:25", durationMinutes: 5, icon: "🪥", title: "Brush Teeth", say: "Brush your teeth and clean the sink." },
+    { time: "7:30", durationMinutes: 10, icon: "👕", title: "Get Dressed", say: "Choose your clothes and put your pajamas away." },
+    { time: "7:40", durationMinutes: 20, icon: "🥣", title: "Breakfast", say: "Time for a healthy breakfast." },
+    { time: "8:00", durationMinutes: 20, icon: "🧸", title: "Play Time", say: "You may choose something fun to play." }
   ],
+  bedtime: [
+    { time: "19:00", durationMinutes: 10, icon: "🧸", title: "Clean Up", say: "Put your toys and belongings away." },
+    { time: "19:10", durationMinutes: 15, icon: "🛁", title: "Bath Time", say: "Time to get clean and ready for bed." },
+    { time: "19:25", durationMinutes: 5, icon: "👚", title: "Pajamas", say: "Put on your pajamas." },
+    { time: "19:30", durationMinutes: 5, icon: "🪥", title: "Brush Teeth", say: "Brush your teeth and clean the sink." },
+    { time: "19:35", durationMinutes: 15, icon: "📖", title: "Story Time", say: "Choose a bedtime story." },
+    { time: "19:50", durationMinutes: 10, icon: "🌙", title: "Bedtime", say: "Good night Vlora. Sweet dreams." }
+  ]
+};
 
-  bedtimeTasks: [
-    {
-      time: "19:00",
-      durationMinutes: 10,
-      icon: "🧸",
-      title: "Clean Up",
-      say: "Put your toys and belongings away."
-    },
-    {
-      time: "19:10",
-      durationMinutes: 15,
-      icon: "🛁",
-      title: "Bath Time",
-      say: "Time to get clean and ready for bed."
-    },
-    {
-      time: "19:25",
-      durationMinutes: 5,
-      icon: "👚",
-      title: "Pajamas",
-      say: "Put on your pajamas."
-    },
-    {
-      time: "19:30",
-      durationMinutes: 5,
-      icon: "🪥",
-      title: "
-      
-/* =========================================================
-   SECTION 2: DATE, TIME, MODE, AND TASK HELPERS
-========================================================= */
+const $ = (id) => document.getElementById(id);
+const el = {
+  greeting: $("greeting"), dayMessage: $("dayMessage"), currentTime: $("currentTime"), currentDate: $("currentDate"),
+  weatherIcon: $("weatherIcon"), currentTemperature: $("currentTemperature"), highTemperature: $("highTemperature"), lowTemperature: $("lowTemperature"),
+  currentTaskCard: $("currentTaskCard"), timerRing: $("timerRing"), currentTaskIcon: $("currentTaskIcon"), countdown: $("countdown"), countdownLabel: $("countdownLabel"),
+  currentTaskTitle: $("currentTaskTitle"), currentTaskSpeech: $("currentTaskSpeech"), sayButton: $("sayButton"), completeButton: $("completeButton"), encouragement: $("encouragement"),
+  taskList: $("taskList"), progressTitle: $("progressTitle"), progressTrack: $("progressTrack"), progressFill: $("progressFill"), progressCount: $("progressCount"),
+  fullscreenButton: $("fullscreenButton"), celebration: $("celebration")
+};
 
-function getMinutesFromTime(time) {
-  const [hours, minutes] = time.split(":").map(Number);
-  return hours * 60 + minutes;
+const state = { mode: "", tasks: [], completed: new Set(), currentIndex: 0, lastIndex: -1 };
+const toMinutes = (time) => { const [h,m] = time.split(":").map(Number); return h*60+m; };
+const nowMinutes = (d) => d.getHours()*60+d.getMinutes();
+const nowSeconds = (d) => d.getHours()*3600+d.getMinutes()*60+d.getSeconds();
+const formatCountdown = (s) => { s=Math.max(0,Math.ceil(s)); return `${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`; };
+const formatTaskTime = (time) => { const [h,m]=time.split(":").map(Number); const d=new Date(); d.setHours(h,m,0,0); return d.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"}); };
+
+function determineMode(d) {
+  if (nowMinutes(d) >= 18*60+30) return "bedtime";
+  return [0,6].includes(d.getDay()) ? "stayHome" : "weekday";
 }
 
-function getCurrentMinutes(date = new Date()) {
-  return date.getHours() * 60 + date.getMinutes();
+function modeDisplay(mode) {
+  if (mode === "bedtime") return { heading:`It's <span class="gradient-text">Bedtime!</span>`, progress:"Bedtime Routine Progress", cls:"bedtime-mode" };
+  if (mode === "stayHome") return { heading:`It's a <span class="gradient-text">Stay at Home Day!</span>`, progress:"Morning Routine Progress", cls:"stay-home-mode" };
+  return { heading:`It's a <span class="gradient-text">School Day!</span>`, progress:"Morning Routine Progress", cls:"school-day-mode" };
 }
 
-function formatTaskTime(time) {
-  const [hours, minutes] = time.split(":").map(Number);
-  const date = new Date();
-
-  date.setHours(hours, minutes, 0, 0);
-
-  return date.toLocaleTimeString([], {
-    hour: "numeric",
-    minute: "2-digit"
-  });
-}
-
-function formatCountdown(totalSeconds) {
-  const safeSeconds = Math.max(0, Math.ceil(totalSeconds));
-  const minutes = Math.floor(safeSeconds / 60);
-  const seconds = safeSeconds % 60;
-
-  return `${minutes}:${String(seconds).padStart(2, "0")}`;
-}
-
-function getGreeting(date = new Date()) {
-  const hour = date.getHours();
-
-  if (hour < 12) {
-    return `Good morning, ${APP_CONFIG.childName}!`;
-  }
-
-  if (hour < 17) {
-    return `Good afternoon, ${APP_CONFIG.childName}!`;
-  }
-
+function greeting(d) {
+  if (d.getHours() < 12) return `Good morning, ${APP_CONFIG.childName}!`;
+  if (d.getHours() < 17) return `Good afternoon, ${APP_CONFIG.childName}!`;
   return `Good evening, ${APP_CONFIG.childName}!`;
 }
 
-function isWeekend(date = new Date()) {
-  const day = date.getDay();
-  return day === 0 || day === 6;
+function updateMode(d) {
+  const mode = determineMode(d);
+  if (mode !== state.mode) {
+    state.mode = mode;
+    state.tasks = SCHEDULES[mode];
+    state.completed.clear();
+    state.lastIndex = -1;
+  }
+  const display = modeDisplay(mode);
+  document.body.className = display.cls;
+  el.greeting.textContent = greeting(d);
+  el.dayMessage.innerHTML = display.heading;
+  el.progressTitle.textContent = display.progress;
 }
 
-function determineMode(date = new Date()) {
-  const minutesNow = getCurrentMinutes(date);
-
-  if (minutesNow >= 18 * 60 + 30) {
-    return "bedtime";
-  }
-
-  if (isWeekend(date)) {
-    return "stayHome";
-  }
-
-  return "weekday";
+function updateClock(d) {
+  el.currentTime.textContent = d.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
+  el.currentDate.textContent = d.toLocaleDateString([], {weekday:"long", month:"long", day:"numeric"});
 }
 
-function getTasksForMode(mode) {
-  if (mode === "bedtime") {
-    return SCHEDULES.bedtimeTasks;
+function currentTaskIndex(d) {
+  const mins = nowMinutes(d);
+  for (let i=0;i<state.tasks.length;i++) {
+    const start = toMinutes(state.tasks[i].time);
+    const end = start + state.tasks[i].durationMinutes;
+    if (mins >= start && mins < end) return i;
+    if (mins < start) return i;
   }
-
-  if (mode === "stayHome") {
-    return SCHEDULES.stayHomeTasks;
-  }
-
-  return SCHEDULES.weekdayTasks;
+  return Math.max(0,state.tasks.length-1);
 }
 
-function getModeDisplay(mode) {
-  if (mode === "bedtime") {
-    return {
-      message: `It's <span class="gradient-text">Bedtime!</span>`,
-      progressTitle: "Bedtime Routine Progress",
-      bodyClass: "bedtime-mode"
-    };
-  }
+function renderCurrent(d) {
+  const i = currentTaskIndex(d);
+  const task = state.tasks[i];
+  state.currentIndex = i;
+  const start = toMinutes(task.time)*60;
+  const end = start + task.durationMinutes*60;
+  const now = nowSeconds(d);
+  let progress = 0;
 
-  if (mode === "stayHome") {
-    return {
-      message: `It's a <span class="gradient-text">Stay at Home Day!</span>`,
-      progressTitle: "Morning Routine Progress",
-      bodyClass: "stay-home-mode"
-    };
-  }
+  el.currentTaskIcon.textContent = task.icon;
+  el.currentTaskTitle.textContent = task.title;
+  el.currentTaskSpeech.textContent = task.say;
 
-  return {
-    message: `It's a <span class="gradient-text">School Day!</span>`,
-    progressTitle: "Morning Routine Progress",
-    bodyClass: "school-day-mode"
-  };
-}
-
-function updateMode(date = new Date()) {
-  const newMode = determineMode(date);
-
-  if (newMode !== state.mode || state.tasks.length === 0) {
-    state.mode = newMode;
-    state.tasks = getTasksForMode(newMode);
-    state.completedTaskIndexes.clear();
-    state.currentTaskIndex = 0;
-    state.lastRenderedTaskIndex = -1;
-  }
-
-  const display = getModeDisplay(state.mode);
-
-  document.body.classList.remove(
-    "school-day-mode",
-    "stay-home-mode",
-    "bedtime-mode"
-  );
-
-  document.body.classList.add(display.bodyClass);
-
-  elements.greeting.textContent = getGreeting(date);
-  elements.dayMessage.innerHTML = display.message;
-  elements.progressTitle.textContent = display.progressTitle;
-}
-
-function updateClock(date = new Date()) {
-  elements.currentTime.textContent = date.toLocaleTimeString([], {
-    hour: "numeric",
-    minute: "2-digit"
-  });
-
-  elements.currentDate.textContent = date.toLocaleDateString([], {
-    weekday: "long",
-    month: "long",
-    day: "numeric"
-  });
-}
-
-function getTaskTiming(task, date = new Date()) {
-  const startMinutes = getMinutesFromTime(task.time);
-  const endMinutes = startMinutes + task.durationMinutes;
-  const currentMinutes = getCurrentMinutes(date);
-  const currentSeconds =
-    date.getHours() * 3600 +
-    date.getMinutes() * 60 +
-    date.getSeconds();
-
-  const startSeconds = startMinutes * 60;
-  const endSeconds = endMinutes * 60;
-
-  return {
-    startMinutes,
-    endMinutes,
-    currentMinutes,
-    secondsRemaining: endSeconds - currentSeconds,
-    hasStarted: currentMinutes >= startMinutes,
-    hasEnded: currentMinutes >= endMinutes
-  };
-}
-
-function findCurrentTaskIndex(date = new Date()) {
-  if (!state.tasks.length) {
-    return 0;
-  }
-
-  const currentMinutes = getCurrentMinutes(date);
-
-  for (let index = 0; index < state.tasks.length; index += 1) {
-    const task = state.tasks[index];
-    const start = getMinutesFromTime(task.time);
-    const end = start + task.durationMinutes;
-
-    if (currentMinutes >= start && currentMinutes < end) {
-      return index;
-    }
-
-    if (currentMinutes < start) {
-      return index;
-    }
-  }
-
-  return state.tasks.length - 1;
-}
-/* =========================================================
-   SECTION 3: CURRENT TASK AND UP NEXT
-========================================================= */
-
-function renderCurrentTask(date = new Date()) {
-  if (!state.tasks.length) {
-    return;
-  }
-
-  const taskIndex = findCurrentTaskIndex(date);
-  const task = state.tasks[taskIndex];
-  const timing = getTaskTiming(task, date);
-
-  state.currentTaskIndex = taskIndex;
-
-  elements.currentTaskIcon.textContent = task.icon;
-  elements.currentTaskTitle.textContent = task.title;
-  elements.currentTaskSpeech.textContent = task.say;
-
-  if (!timing.hasStarted) {
-    const secondsUntilStart =
-      getMinutesFromTime(task.time) * 60 -
-      (date.getHours() * 3600 +
-        date.getMinutes() * 60 +
-        date.getSeconds());
-
-    elements.countdown.textContent = formatCountdown(secondsUntilStart);
-    elements.countdownLabel.textContent = "UNTIL START";
-  } else if (!timing.hasEnded) {
-    elements.countdown.textContent = formatCountdown(
-      timing.secondsRemaining
-    );
-    elements.countdownLabel.textContent = "REMAINING";
+  if (now < start) {
+    el.countdown.textContent = formatCountdown(start-now);
+    el.countdownLabel.textContent = "UNTIL START";
+  } else if (now < end) {
+    el.countdown.textContent = formatCountdown(end-now);
+    el.countdownLabel.textContent = "REMAINING";
+    progress = ((now-start)/(task.durationMinutes*60))*100;
   } else {
-    elements.countdown.textContent = "0:00";
-    elements.countdownLabel.textContent = "TIME'S UP";
+    el.countdown.textContent = "0:00";
+    el.countdownLabel.textContent = "TIME'S UP";
+    progress = 100;
   }
 
-  const elapsedSeconds = Math.max(
-    0,
-    task.durationMinutes * 60 - timing.secondsRemaining
-  );
+  el.timerRing.style.setProperty("--timer-progress", `${Math.max(0,Math.min(100,progress))*3.6}deg`);
+  const done = state.completed.has(i);
+  el.completeButton.disabled = done;
+  el.completeButton.innerHTML = done ? '<span>✓</span><span>Done!</span>' : '<span>✓</span><span>I did it!</span>';
 
-  const progress = Math.min(
-    100,
-    (elapsedSeconds / (task.durationMinutes * 60)) * 100
-  );
-
-  elements.timerRing.style.setProperty(
-    "--timer-progress",
-    `${progress * 3.6}deg`
-  );
-
-  elements.completeButton.disabled =
-    state.completedTaskIndexes.has(taskIndex);
-
-  elements.completeButton.textContent =
-    state.completedTaskIndexes.has(taskIndex)
-      ? "✓ Done!"
-      : "✓ I did it!";
-
-  if (state.lastRenderedTaskIndex !== taskIndex) {
-    elements.currentTaskCard.classList.remove("task-change");
-
-    requestAnimationFrame(() => {
-      elements.currentTaskCard.classList.add("task-change");
-    });
-
-    state.lastRenderedTaskIndex = taskIndex;
+  if (state.lastIndex !== i) {
+    el.currentTaskCard.classList.remove("task-change");
+    requestAnimationFrame(()=>el.currentTaskCard.classList.add("task-change"));
+    state.lastIndex = i;
   }
 }
 
-function renderUpcomingTasks(date = new Date()) {
-  elements.taskList.innerHTML = "";
-
-  const startIndex = state.currentTaskIndex + 1;
-  const upcomingTasks = state.tasks.slice(
-    startIndex,
-    startIndex + APP_CONFIG.upcomingTaskLimit
-  );
-
-  if (!upcomingTasks.length) {
-    const finishedMessage = document.createElement("div");
-    finishedMessage.className = "empty-task-list";
-    finishedMessage.innerHTML = `
-      <span class="empty-task-icon">🎉</span>
-      <strong>All finished!</strong>
-      <span>Great job, ${APP_CONFIG.childName}!</span>
-    `;
-
-    elements.taskList.appendChild(finishedMessage);
+function renderUpcoming() {
+  el.taskList.innerHTML = "";
+  const start = state.currentIndex+1;
+  const items = state.tasks.slice(start,start+APP_CONFIG.upcomingTaskLimit);
+  if (!items.length) {
+    el.taskList.innerHTML = `<div class="empty-task-list"><span class="empty-task-icon">🎉</span><strong>All finished!</strong><span>Great job, ${APP_CONFIG.childName}!</span></div>`;
     return;
   }
-
-  upcomingTasks.forEach((task, offset) => {
-    const taskIndex = startIndex + offset;
-    const item = document.createElement("div");
-
-    item.className = "upcoming-task";
-
-    if (state.completedTaskIndexes.has(taskIndex)) {
-      item.classList.add("completed");
-    }
-
-    item.innerHTML = `
-      <div class="upcoming-task-icon">${task.icon}</div>
-
-      <div class="upcoming-task-info">
-        <strong>${task.title}</strong>
-        <span>${formatTaskTime(task.time)}</span>
-      </div>
-
-      <div class="upcoming-task-duration">
-        ${task.durationMinutes} min
-      </div>
-    `;
-
-    elements.taskList.appendChild(item);
+  items.forEach((task,offset)=>{
+    const item=document.createElement("div");
+    item.className="upcoming-task";
+    item.innerHTML=`<div class="upcoming-task-icon">${task.icon}</div><div class="upcoming-task-info"><strong>${task.title}</strong><span>${formatTaskTime(task.time)}</span></div><div class="upcoming-task-duration">${task.durationMinutes} min</div>`;
+    el.taskList.appendChild(item);
   });
 }
 
 function updateProgress() {
-  const completedCount = state.completedTaskIndexes.size;
-  const totalTasks = state.tasks.length;
-  const percentage =
-    totalTasks === 0 ? 0 : (completedCount / totalTasks) * 100;
-
-  elements.progressFill.style.width = `${percentage}%`;
-  elements.progressCount.textContent =
-    `${completedCount} of ${totalTasks} complete`;
-
-  elements.progressTrack.setAttribute(
-    "aria-valuenow",
-    String(Math.round(percentage))
-  );
+  const done=state.completed.size, total=state.tasks.length;
+  el.progressFill.style.width = `${total ? (done/total)*100 : 0}%`;
+  el.progressCount.textContent = `${done} / ${total}`;
+  el.progressTrack.setAttribute("aria-valuemax", String(total));
+  el.progressTrack.setAttribute("aria-valuenow", String(done));
 }
 
-function renderSchedule(date = new Date()) {
-  renderCurrentTask(date);
-  renderUpcomingTasks(date);
-  updateProgress();
-}
-/* =========================================================
-   SECTION 4: BUTTONS, SPEECH, AND CELEBRATION
-========================================================= */
+function render(d) { renderCurrent(d); renderUpcoming(); updateProgress(); }
+function speak(text) { if (!("speechSynthesis" in window)) return; speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); u.rate=.9; u.pitch=1.05; speechSynthesis.speak(u); }
+function celebrate() { el.celebration.textContent="🎉 ⭐ 🌈 ✨"; el.celebration.classList.add("show"); setTimeout(()=>el.celebration.classList.remove("show"),2200); }
 
-function speakText(text) {
-  if (!("speechSynthesis" in window)) {
-    elements.encouragement.textContent =
-      "Speech is not supported on this device.";
-    return;
-  }
+el.sayButton.addEventListener("click",()=>speak(state.tasks[state.currentIndex]?.say || ""));
+el.completeButton.addEventListener("click",()=>{
+  if (state.completed.has(state.currentIndex)) return;
+  state.completed.add(state.currentIndex);
+  el.encouragement.innerHTML=`<span class="encouragement-icon">⭐</span><div><strong>Great job, ${APP_CONFIG.childName}!</strong><p>Keep going, you've got this!</p></div>`;
+  celebrate(); speak(`Great job, ${APP_CONFIG.childName}!`); render(new Date());
+});
+el.fullscreenButton.addEventListener("click",async()=>{ try { document.fullscreenElement ? await document.exitFullscreen() : await document.documentElement.requestFullscreen(); } catch {} });
+document.addEventListener("fullscreenchange",()=>{ el.fullscreenButton.innerHTML=document.fullscreenElement?'✕ <span>Exit full screen</span>':'⛶ <span>Full screen</span>'; });
 
-  window.speechSynthesis.cancel();
-
-  const message = new SpeechSynthesisUtterance(text);
-  message.rate = 0.9;
-  message.pitch = 1.05;
-  message.volume = 1;
-
-  window.speechSynthesis.speak(message);
-}
-
-function speakCurrentTask() {
-  const task = state.tasks[state.currentTaskIndex];
-
-  if (!task) {
-    return;
-  }
-
-  speakText(task.say);
-}
-
-function showCelebration() {
-  elements.celebration.classList.remove("show");
-
-  requestAnimationFrame(() => {
-    elements.celebration.classList.add("show");
-  });
-
-  window.setTimeout(() => {
-    elements.celebration.classList.remove("show");
-  }, 2200);
-}
-
-function completeCurrentTask() {
-  const taskIndex = state.currentTaskIndex;
-  const task = state.tasks[taskIndex];
-
-  if (!task || state.completedTaskIndexes.has(taskIndex)) {
-    return;
-  }
-
-  state.completedTaskIndexes.add(taskIndex);
-
-  elements.encouragement.textContent =
-    `Great job, ${APP_CONFIG.childName}!`;
-
-  showCelebration();
-  speakText(`Great job, ${APP_CONFIG.childName}!`);
-
-  renderSchedule(new Date());
-}
-
-function toggleFullscreen() {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen?.();
-    return;
-  }
-
-  document.exitFullscreen?.();
-}
-
-function updateFullscreenButton() {
-  elements.fullscreenButton.textContent =
-    document.fullscreenElement ? "✕" : "⛶";
-
-  elements.fullscreenButton.setAttribute(
-    "aria-label",
-    document.fullscreenElement
-      ? "Exit fullscreen"
-      : "Enter fullscreen"
-  );
-}
-
-function attachEventListeners() {
-  elements.sayButton.addEventListener("click", speakCurrentTask);
-  elements.completeButton.addEventListener(
-    "click",
-    completeCurrentTask
-  );
-
-  elements.fullscreenButton.addEventListener(
-    "click",
-    toggleFullscreen
-  );
-
-  document.addEventListener(
-    "fullscreenchange",
-    updateFullscreenButton
-  );
-}
-
-/* =========================================================
-   SECTION 5: WEATHER, APP LOOP, AND STARTUP
-========================================================= */
-
-function getWeatherIcon(code, isDay = true) {
-  if (code === 0) {
-    return isDay ? "☀️" : "🌙";
-  }
-
-  if ([1, 2].includes(code)) {
-    return isDay ? "🌤️" : "☁️";
-  }
-
-  if (code === 3) {
-    return "☁️";
-  }
-
-  if ([45, 48].includes(code)) {
-    return "🌫️";
-  }
-
-  if ([51, 53, 55, 56, 57].includes(code)) {
-    return "🌦️";
-  }
-
-  if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) {
-    return "🌧️";
-  }
-
-  if ([71, 73, 75, 77, 85, 86].includes(code)) {
-    return "❄️";
-  }
-
-  if ([95, 96, 99].includes(code)) {
-    return "⛈️";
-  }
-
+function weatherIcon(code,isDay) {
+  if (code===0) return isDay?"☀️":"🌙";
+  if ([1,2].includes(code)) return isDay?"🌤️":"☁️";
+  if (code===3) return "☁️";
+  if ([45,48].includes(code)) return "🌫️";
+  if ([51,53,55,56,57].includes(code)) return "🌦️";
+  if ([61,63,65,66,67,80,81,82].includes(code)) return "🌧️";
+  if ([71,73,75,77,85,86].includes(code)) return "❄️";
+  if ([95,96,99].includes(code)) return "⛈️";
   return "🌤️";
 }
 
 async function loadWeather() {
-  const url =
-    "https://api.open-meteo.com/v1/forecast" +
-    `?latitude=${APP_CONFIG.weatherLatitude}` +
-    `&longitude=${APP_CONFIG.weatherLongitude}` +
-    "&current=temperature_2m,weather_code,is_day" +
-    "&daily=temperature_2m_max,temperature_2m_min" +
-    "&temperature_unit=fahrenheit" +
-    "&timezone=auto" +
-    "&forecast_days=1";
-
+  const url=`https://api.open-meteo.com/v1/forecast?latitude=${APP_CONFIG.weatherLatitude}&longitude=${APP_CONFIG.weatherLongitude}&current=temperature_2m,weather_code,is_day&daily=temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&timezone=auto&forecast_days=1`;
   try {
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      throw new Error("Weather request failed.");
-    }
-
-    const weather = await response.json();
-
-    const currentTemperature = Math.round(
-      weather.current.temperature_2m
-    );
-
-    const highTemperature = Math.round(
-      weather.daily.temperature_2m_max[0]
-    );
-
-    const lowTemperature = Math.round(
-      weather.daily.temperature_2m_min[0]
-    );
-
-    elements.weatherIcon.textContent = getWeatherIcon(
-      weather.current.weather_code,
-      weather.current.is_day === 1
-    );
-
-    elements.currentTemperature.textContent =
-      `${currentTemperature}°`;
-
-    elements.highTemperature.textContent =
-      `H: ${highTemperature}°`;
-
-    elements.lowTemperature.textContent =
-      `L: ${lowTemperature}°`;
-
-    state.weatherLoaded = true;
-  } catch (error) {
-    console.error(error);
-
-    elements.weatherIcon.textContent = "🌤️";
-    elements.currentTemperature.textContent = "--°";
-    elements.highTemperature.textContent = "H: --°";
-    elements.lowTemperature.textContent = "L: --°";
+    const r=await fetch(url); if(!r.ok) throw new Error(); const w=await r.json();
+    el.weatherIcon.textContent=weatherIcon(w.current.weather_code,w.current.is_day===1);
+    el.currentTemperature.textContent=`${Math.round(w.current.temperature_2m)}°`;
+    el.highTemperature.textContent=`${Math.round(w.daily.temperature_2m_max[0])}°`;
+    el.lowTemperature.textContent=`${Math.round(w.daily.temperature_2m_min[0])}°`;
+  } catch {
+    el.weatherIcon.textContent="🌤️";
   }
 }
 
-function updateApp() {
-  const now = new Date();
-
-  updateMode(now);
-  updateClock(now);
-  renderSchedule(now);
-}
-
-function startApp() {
-  attachEventListeners();
-  updateFullscreenButton();
-  updateApp();
-  loadWeather();
-
-  window.setInterval(updateApp, 1000);
-
-  window.setInterval(() => {
-    loadWeather();
-  }, 30 * 60 * 1000);
-}
-
-document.addEventListener("DOMContentLoaded", startApp);
-
-
-      
+function updateApp() { const d=new Date(); updateMode(d); updateClock(d); render(d); }
+updateApp(); loadWeather(); setInterval(updateApp,1000); setInterval(loadWeather,30*60*1000);
