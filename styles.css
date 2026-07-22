@@ -396,3 +396,140 @@ button { font:inherit; }
     font-size: .75rem;
   }
 }
+
+
+/* ===== Tonight-ready layout fixes ===== */
+
+.juniper-bubble { display: none; }
+
+.juniper-area { justify-content: flex-end; }
+
+.juniper-image {
+  width: min(100%, 270px);
+  max-height: 300px;
+}
+
+.current-task-card {
+  grid-template-columns: minmax(180px, .72fr) minmax(250px, 1fr) minmax(210px, .82fr);
+}
+
+.good-night-screen {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  padding: 24px;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255,255,255,.96) 0 9%, transparent 30%),
+    linear-gradient(145deg, #eef1ff, #f7efff);
+}
+
+.good-night-screen.is-visible { display: grid; }
+
+.good-night-content {
+  width: min(92vw, 760px);
+  max-height: 92vh;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  text-align: center;
+  padding: 24px 30px;
+  border: 1px solid rgba(255,255,255,.9);
+  border-radius: 36px;
+  background: rgba(255,255,255,.78);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(20px);
+}
+
+.good-night-moon {
+  font-size: clamp(3.5rem, 10vh, 6rem);
+  line-height: 1;
+}
+
+.good-night-kicker {
+  margin: 8px 0 3px;
+  color: var(--muted);
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: .78rem;
+}
+
+.good-night-content h2 {
+  margin: 0;
+  font-size: clamp(3rem, 10vh, 6rem);
+  line-height: .95;
+  letter-spacing: -.06em;
+}
+
+.good-night-content h3 {
+  margin: 6px 0;
+  font-size: clamp(2rem, 7vh, 4rem);
+  color: var(--primary);
+}
+
+.good-night-content p:last-of-type {
+  margin: 2px 0 10px;
+  color: var(--muted);
+  font-size: clamp(1rem, 3vh, 1.45rem);
+  font-weight: 800;
+}
+
+.good-night-juniper {
+  width: min(38vw, 260px);
+  max-height: 32vh;
+  object-fit: contain;
+}
+
+body.good-night-active .app-shell > :not(.good-night-screen) {
+  visibility: hidden;
+}
+
+body.good-night-active .good-night-screen {
+  visibility: visible;
+}
+
+@media (max-height: 700px) and (orientation: landscape) {
+  .current-task-card {
+    grid-template-columns: minmax(145px, .68fr) minmax(215px, 1fr) minmax(175px, .74fr);
+    gap: 10px;
+  }
+
+  .task-information { align-self: center; }
+  .juniper-area { justify-content: center; }
+
+  .juniper-image {
+    width: min(100%, 205px);
+    max-height: 230px;
+  }
+
+  .good-night-screen { padding: 12px; }
+
+  .good-night-content {
+    width: min(94vw, 680px);
+    max-height: 94vh;
+    grid-template-columns: minmax(0, 1fr) minmax(180px, .55fr);
+    grid-template-areas:
+      "moon cat"
+      "kicker cat"
+      "title cat"
+      "name cat"
+      "message cat";
+    column-gap: 20px;
+    padding: 16px 24px;
+  }
+
+  .good-night-moon { grid-area: moon; font-size: 3.2rem; }
+  .good-night-kicker { grid-area: kicker; }
+  .good-night-content h2 { grid-area: title; font-size: 4rem; }
+  .good-night-content h3 { grid-area: name; font-size: 2.7rem; }
+  .good-night-content p:last-of-type { grid-area: message; font-size: 1rem; }
+
+  .good-night-juniper {
+    grid-area: cat;
+    width: min(27vw, 210px);
+    max-height: 58vh;
+  }
+}
