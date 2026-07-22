@@ -26,7 +26,67 @@ button { font:inherit; }
 .status-detail { margin:2px 0 0; color:var(--muted); font-weight:700; }
 .dashboard { display:grid; grid-template-columns:minmax(0,1.55fr) minmax(320px,.85fr); gap:22px; }
 .current-task-card,.up-next-card,.progress-card { background:var(--card); border:1px solid rgba(255,255,255,.85); box-shadow:var(--shadow); backdrop-filter:blur(20px); }
-.current-task-card { min-height:470px; border-radius:var(--radius); padding:34px; display:grid; grid-template-columns:minmax(240px,.8fr) minmax(0,1.2fr); gap:34px; align-items:center; }
+.current-task-card {
+  min-height: 0;
+  border-radius: var(--radius);
+  padding: 24px;
+  display: grid;
+  grid-template-columns: minmax(175px, .7fr) minmax(260px, 1.2fr) minmax(145px, .65fr);
+  gap: 22px;
+  align-items: center;
+  overflow: hidden;
+}
+.task-information {
+  min-width: 0;
+}
+
+.juniper-area {
+  height: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  position: relative;
+}
+
+.juniper-image {
+  display: block;
+  width: min(100%, 210px);
+  max-height: 245px;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.juniper-bubble {
+  position: relative;
+  max-width: 190px;
+  margin-bottom: 8px;
+  padding: 10px 13px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .94);
+  color: var(--text);
+  font-size: .9rem;
+  font-weight: 850;
+  line-height: 1.25;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(57, 66, 112, .1);
+}
+
+.juniper-bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  width: 13px;
+  height: 13px;
+  background: rgba(255, 255, 255, .94);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  transform: translateX(-50%) rotate(45deg);
+}
 .timer-column { display:grid; place-items:center; }
 .timer-ring { --timer-progress:0deg; width:min(31vw,300px); aspect-ratio:1; border-radius:50%; display:grid; place-items:center; background:conic-gradient(var(--primary) var(--timer-progress), rgba(111,92,255,.12) 0); position:relative; box-shadow:inset 0 0 0 1px rgba(255,255,255,.5); }
 .timer-ring::before { content:""; position:absolute; inset:16px; border-radius:50%; background:rgba(255,255,255,.92); }
@@ -109,64 +169,230 @@ button { font:inherit; }
 @media (max-width: 980px) { .top-bar { flex-direction:column; } .status-widgets { width:100%; justify-content:flex-start; } .dashboard { grid-template-columns:1fr; } .current-task-card { grid-template-columns:1fr; } .timer-ring { width:min(58vw,290px); } }
 @media (max-width: 640px) { .app-shell { padding:16px; } .status-card { min-width:0; flex:1 1 220px; } .current-task-card { padding:24px; } .progress-card { grid-template-columns:1fr; } .fullscreen-button span { display:none; } }
 
-/* Fire tablet landscape fit */
+/* Fire 7 tablet landscape */
 @media (max-height: 700px) and (orientation: landscape) {
+  body {
+    overflow: hidden;
+  }
+
   .app-shell {
-    min-height: 100vh;
-    padding: 14px 18px 12px;
-    gap: 10px;
+    height: 100vh;
+    min-height: 0;
+    padding: 10px 14px;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 8px;
+    overflow: hidden;
   }
 
   .top-bar {
-    margin-bottom: 6px;
+    margin: 0;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .greeting {
+    margin-bottom: 3px;
+    font-size: .95rem;
+  }
+
+  .day-message {
+    font-size: clamp(1.75rem, 3.6vw, 2.8rem);
+  }
+
+  .status-widgets {
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+
+  .status-card {
+    min-width: 0;
+    padding: 8px 12px;
+    border-radius: 18px;
+    gap: 9px;
+  }
+
+  .status-icon,
+  .weather-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 13px;
+    font-size: 1.45rem;
+  }
+
+  .status-value {
+    font-size: 1.15rem;
+  }
+
+  .status-detail {
+    font-size: .72rem;
   }
 
   .dashboard {
+    height: auto;
     min-height: 0;
-    height: calc(100vh - 150px);
+    grid-template-columns: minmax(0, 1.65fr) minmax(230px, .7fr);
+    gap: 10px;
+    overflow: hidden;
+  }
+
+  .current-task-card {
+    height: 100%;
+    min-height: 0;
+    padding: 14px;
+    grid-template-columns: minmax(135px, .68fr) minmax(210px, 1.12fr) minmax(115px, .58fr);
     gap: 12px;
   }
 
-  .current-task-card,
-  .up-next-card,
-  .done-card {
-    min-height: 0;
-    height: 100%;
-    padding: 18px;
+  .timer-ring {
+    width: min(31vh, 185px);
+    height: min(31vh, 185px);
   }
 
-  .timer-ring {
-    width: min(29vh, 230px);
-    height: min(29vh, 230px);
+  .timer-ring::before {
+    inset: 11px;
+  }
+
+  .current-task-icon {
+    font-size: clamp(2.8rem, 6vh, 4rem);
+  }
+
+  .countdown {
+    margin-top: 5px;
+    font-size: clamp(2rem, 5.2vh, 3.2rem);
   }
 
   .current-task-title {
-    font-size: clamp(2rem, 4.5vw, 3.4rem);
+    margin: 8px 0 5px;
+    font-size: clamp(2rem, 4.6vw, 3.15rem);
   }
 
   .current-task-speech {
-    margin: 4px 0 10px;
+    font-size: clamp(.92rem, 1.7vw, 1.15rem);
+    line-height: 1.3;
   }
 
   .task-actions {
-    margin-top: 8px;
+    margin-top: 10px;
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+
+  .action-button {
+    padding: 10px 14px;
+    border-radius: 14px;
+    white-space: nowrap;
   }
 
   .encouragement {
-    margin-top: 10px;
-    padding: 10px 14px;
+    margin-top: 8px;
+    padding: 8px 10px;
+    border-radius: 14px;
+    font-size: .82rem;
+  }
+
+  .encouragement-icon {
+    font-size: 1.35rem;
+  }
+
+  .juniper-image {
+    width: min(100%, 150px);
+    max-height: 175px;
+  }
+
+  .juniper-bubble {
+    max-width: 145px;
+    margin-bottom: 5px;
+    padding: 7px 9px;
+    border-radius: 13px;
+    font-size: .72rem;
+  }
+
+  .side-column {
+    height: 100%;
+    min-height: 0;
+    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .up-next-card,
+  .done-card {
+    height: 100%;
+    min-height: 0;
+    padding: 11px;
+    border-radius: 18px;
+  }
+
+  .section-heading {
+    margin-bottom: 7px;
+    font-size: .68rem;
+  }
+
+  .task-list {
+    gap: 6px;
+  }
+
+  .upcoming-task {
+    grid-template-columns: 38px minmax(0, 1fr) auto;
+    gap: 7px;
+    padding: 7px;
+    border-radius: 13px;
+  }
+
+  .upcoming-task-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    font-size: 1.3rem;
+  }
+
+  .upcoming-task-info strong {
+    font-size: .8rem;
+  }
+
+  .upcoming-task-info span,
+  .upcoming-task-duration {
+    font-size: .66rem;
+  }
+
+  .empty-task-list {
+    min-height: 0;
+    height: 100%;
+    gap: 3px;
+    font-size: .72rem;
+  }
+
+  .empty-task-icon {
+    font-size: 2rem;
   }
 
   .progress-card {
-    position: relative;
-    z-index: 5;
-    margin-top: 0;
-    padding: 10px 14px;
-    min-height: 54px;
+    margin: 0;
+    min-height: 44px;
+    padding: 8px 105px 8px 12px;
+    border-radius: 17px;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 10px;
+  }
+
+  .progress-label {
+    font-size: .78rem;
+  }
+
+  .progress-track {
+    height: 12px;
+  }
+
+  .progress-count {
+    font-size: .78rem;
   }
 
   .fullscreen-button {
-    bottom: 14px;
-    right: 18px;
+    position: fixed;
+    right: 20px;
+    bottom: 15px;
+    z-index: 100;
+    padding: 8px 12px;
+    font-size: .75rem;
   }
 }
