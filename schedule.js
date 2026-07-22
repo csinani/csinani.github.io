@@ -43,12 +43,36 @@ const el = {
   weatherIcon: $("weatherIcon"), currentTemperature: $("currentTemperature"), highTemperature: $("highTemperature"), lowTemperature: $("lowTemperature"),
   currentTaskCard: $("currentTaskCard"), timerRing: $("timerRing"), currentTaskIcon: $("currentTaskIcon"), countdown: $("countdown"), countdownLabel: $("countdownLabel"),
   currentTaskTitle: $("currentTaskTitle"), currentTaskSpeech: $("currentTaskSpeech"), sayButton: $("sayButton"), completeButton: $("completeButton"), encouragement: $("encouragement"),
-  taskList: $("taskList"),
-completedTaskList: $("completedTaskList"),progressTitle: $("progressTitle"), progressTrack: $("progressTrack"), progressFill: $("progressFill"), progressCount: $("progressCount"),
+  taskList: $("taskList"), completedTaskList: $("completedTaskList"),
+  progressTitle: $("progressTitle"), progressTrack: $("progressTrack"), progressFill: $("progressFill"), progressCount: $("progressCount"),
+  juniperImage: $("juniperImage"), juniperBubble: $("juniperBubble"),
+  goodNightScreen: $("goodNightScreen"), goodNightName: $("goodNightName"),
   fullscreenButton: $("fullscreenButton"), celebration: $("celebration")
 };
 
+
 const state = { mode: "", tasks: [], completed: new Set(), currentIndex: 0, lastIndex: -1 };
+
+function storageKey(d = new Date(), mode = state.mode) {
+  const day = d.toISOString().slice(0, 10);
+  return `kid-schedule:${APP_CONFIG.childName}:${day}:${mode}`;
+}
+
+function loadCompleted(d = new Date()) {
+  try {
+    const saved = JSON.parse(localStorage.getItem(storageKey(d)) || "[]");
+    state.completed = new Set(saved.filter(Number.isInteger));
+  } catch {
+    state.completed = new Set();
+  }
+}
+
+function saveCompleted(d = new Date()) {
+  try {
+    localStorage.setItem(storageKey(d), JSON.stringify([...state.completed]));
+  } catch {}
+}
+
 const toMinutes = (time) => { const [h,m] = time.split(":").map(Number); return h*60+m; };
 const nowMinutes = (d) => d.getHours()*60+d.getMinutes();
 const nowSeconds = (d) => d.getHours()*3600+d.getMinutes()*60+d.getSeconds();
@@ -77,8 +101,8 @@ function updateMode(d) {
   if (mode !== state.mode) {
     state.mode = mode;
     state.tasks = SCHEDULES[mode];
-    state.completed.clear();
     state.lastIndex = -1;
+    loadCompleted(d);
   }
   const display = modeDisplay(mode);
   document.body.className = display.cls;
@@ -103,12 +127,36 @@ function currentTaskIndex(d) {
   return Math.max(0,state.tasks.length-1);
 }
 
+
+function bedtimeEndSeconds() {
+  const last = state.tasks[state.tasks.length - 1];
+  return last ? (toMinutes(last.time) + last.durationMinutes) * 60 : 0;
+}
+
+function shouldShowGoodNight(d) {
+  if (state.mode !== "bedtime") return false;
+  const allCompleted = state.tasks.length > 0 && state.completed.size >= state.tasks.length;
+  return allCompleted || nowSeconds(d) >= bedtimeEndSeconds();
+}
+
+function showGoodNight(show) {
+  document.body.classList.toggle("good-night-active", show);
+  el.goodNightScreen?.classList.toggle("is-visible", show);
+  el.goodNightScreen?.setAttribute("aria-hidden", String(!show));
+  if (el.goodNightName) el.goodNightName.textContent = APP_CONFIG.childName;
+}
+
 function renderCurrent(d) {
   const i = currentTaskIndex(d);
   const task = state.tasks[i];
+  let completionChanged = false;
   for (let x = 0; x < i; x++) {
-    state.completed.add(x);
-}
+    if (!state.completed.has(x)) {
+      state.completed.add(x);
+      completionChanged = true;
+    }
+  }
+  if (completionChanged) saveCompleted(d);
   state.currentIndex = i;
   const start = toMinutes(task.time)*60;
   const end = start + task.durationMinutes*60;
@@ -241,7 +289,25 @@ function updateProgress() {
   el.progressTrack.setAttribute("aria-valuenow", String(done));
 }
 
-function render(d) { renderCurrent(d); renderUpcoming(); updateProgress(); }
+function render(d) {
+  const goodNight = shouldShowGoodNight(d);
+
+  if (goodNight && state.completed.size < state.tasks.length) {
+    state.tasks.forEach((_, index) => state.completed.add(index));
+    saveCompleted(d);
+  }
+
+  showGoodNight(goodNight);
+
+  if (goodNight) {
+    updateProgress();
+    return;
+  }
+
+  renderCurrent(d);
+  renderUpcoming();
+  updateProgress();
+}
 function speak(text) { if (!("speechSynthesis" in window)) return; speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); u.rate=.9; u.pitch=1.05; speechSynthesis.speak(u); }
 function celebrate() { el.celebration.textContent="🎉 ⭐ 🌈 ✨"; el.celebration.classList.add("show"); setTimeout(()=>el.celebration.classList.remove("show"),2200); }
 
@@ -249,6 +315,7 @@ el.sayButton.addEventListener("click",()=>speak(state.tasks[state.currentIndex]?
 el.completeButton.addEventListener("click",()=>{
   if (state.completed.has(state.currentIndex)) return;
   state.completed.add(state.currentIndex);
+  saveCompleted(new Date());
   el.encouragement.innerHTML=`<span class="encouragement-icon">⭐</span><div><strong>Great job, ${APP_CONFIG.childName}!</strong><p>Keep going, you've got this!</p></div>`;
   celebrate(); speak(`Great job, ${APP_CONFIG.childName}!`); render(new Date());
 });
