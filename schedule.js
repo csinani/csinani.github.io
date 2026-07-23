@@ -118,13 +118,29 @@ function updateClock(d) {
 
 function currentTaskIndex(d) {
   const mins = nowMinutes(d);
-  for (let i=0;i<state.tasks.length;i++) {
+  let index = Math.max(0, state.tasks.length - 1);
+
+  for (let i = 0; i < state.tasks.length; i++) {
     const start = toMinutes(state.tasks[i].time);
     const end = start + state.tasks[i].durationMinutes;
-    if (mins >= start && mins < end) return i;
-    if (mins < start) return i;
+
+    if (mins >= start && mins < end) {
+      index = i;
+      break;
+    }
+
+    if (mins < start) {
+      index = i;
+      break;
+    }
   }
-  return Math.max(0,state.tasks.length-1);
+
+  // When a child finishes early, immediately advance to the next task.
+  while (index < state.tasks.length - 1 && state.completed.has(index)) {
+    index += 1;
+  }
+
+  return index;
 }
 
 
