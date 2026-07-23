@@ -50,6 +50,21 @@ const el = {
   fullscreenButton: $("fullscreenButton"), celebration: $("celebration")
 };
 
+const juniperImage = document.getElementById("juniperImage");
+
+const JUNIPER_IMAGES = {
+    default: "images/juniper-wave.png",
+
+    "Wake Up": "images/juniper-wave.png",
+    "Go Potty": "images/juniper-wave.png",
+    "Brush Teeth": "images/juniper-toothbrush.png",
+    "Brush Your Hair": "images/juniper-wave.png",
+    "Get Dressed": "images/juniper-backpack.png",
+    "Breakfast": "images/juniper-pancakes.png",
+    "Backpack Check": "images/juniper-backpack.png",
+    "Shoes On": "images/juniper-backpack.png",
+    "Story Time": "images/juniper-story.png"
+};
 
 const state = { mode: "", tasks: [], completed: new Set(), currentIndex: 0, lastIndex: -1 };
 
@@ -178,6 +193,10 @@ function renderCurrent(d) {
   const end = start + task.durationMinutes*60;
   const now = nowSeconds(d);
   let progress = 0;
+
+  juniperImage.src =
+    JUNIPER_IMAGES[task.title] ||
+    JUNIPER_IMAGES.default;
 
   el.currentTaskIcon.textContent = task.icon;
   el.currentTaskTitle.textContent = task.title;
@@ -333,7 +352,18 @@ el.completeButton.addEventListener("click",()=>{
   state.completed.add(state.currentIndex);
   saveCompleted(new Date());
   el.encouragement.innerHTML=`<span class="encouragement-icon">⭐</span><div><strong>Great job, ${APP_CONFIG.childName}!</strong><p>Keep going, you've got this!</p></div>`;
-  celebrate(); speak(`Great job, ${APP_CONFIG.childName}!`); render(new Date());
+  
+  celebrate();
+  speak(`Great job, ${APP_CONFIG.childName}!`);
+  
+  // Show celebration Juniper
+  el.juniperImage.src = "juniper-celebrate.png";
+  
+  // Wait 2 seconds before moving to the next task
+  setTimeout(() => {
+      render(new Date());
+  }, 2000);
+    
 });
 el.fullscreenButton.addEventListener("click",async()=>{ try { document.fullscreenElement ? await document.exitFullscreen() : await document.documentElement.requestFullscreen(); } catch {} });
 document.addEventListener("fullscreenchange",()=>{ el.fullscreenButton.innerHTML=document.fullscreenElement?'✕ <span>Exit full screen</span>':'⛶ <span>Full screen</span>'; });
