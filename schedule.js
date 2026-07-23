@@ -164,11 +164,11 @@ function bedtimeEndSeconds() {
   return last ? (toMinutes(last.time) + last.durationMinutes) * 60 : 0;
 }
 
-function shouldShowGoodNight(d) {
-  if (state.mode !== "bedtime") return false;
-  const allCompleted = state.tasks.length > 0 && state.completed.size >= state.tasks.length;
-  return allCompleted || nowSeconds(d) >= bedtimeEndSeconds();
-}
+//function shouldShowGoodNight(d) {
+ // if (state.mode !== "bedtime") return false;
+ // const allCompleted = state.tasks.length > 0 && state.completed.size >= state.tasks.length;
+ // return allCompleted || nowSeconds(d) >= bedtimeEndSeconds();
+//}
 
 function showGoodNight(show) {
   document.body.classList.toggle("good-night-active", show);
