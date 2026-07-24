@@ -53,17 +53,17 @@ const el = {
 const juniperImage = document.getElementById("juniperImage");
 
 const JUNIPER_IMAGES = {
-    default: "images/juniper-wave.png",
+    default: "juniper-wave.png",
 
-    "Wake Up": "images/juniper-wave.png",
-    "Go Potty": "images/juniper-wave.png",
-    "Brush Teeth": "images/juniper-toothbrush.png",
-    "Brush Your Hair": "images/juniper-wave.png",
-    "Get Dressed": "images/juniper-backpack.png",
-    "Breakfast": "images/juniper-pancakes.png",
-    "Backpack Check": "images/juniper-backpack.png",
-    "Shoes On": "images/juniper-backpack.png",
-    "Story Time": "images/juniper-story.png"
+    "Wake Up": "juniper-wave.png",
+    "Go Potty": "juniper-wave.png",
+    "Brush Teeth": "juniper-toothbrush.png",
+    "Brush Your Hair": "juniper-wave.png",
+    "Get Dressed": "juniper-backpack.png",
+    "Breakfast": "juniper-pancakes.png",
+    "Backpack Check": "juniper-backpack.png",
+    "Shoes On": "juniper-backpack.png",
+    "Story Time": "juniper-story.png"
 };
 
 const state = { mode: "", tasks: [], completed: new Set(), currentIndex: 0, lastIndex: -1 };
