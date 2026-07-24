@@ -66,6 +66,20 @@ const JUNIPER_IMAGES = {
     "Story Time": "juniper-story.png"
 };
 
+const JUNIPER_MESSAGES = {
+    default: "You've got this!",
+
+    "Wake Up": "Good morning, sunshine! ☀️",
+    "Go Potty": "Let's go potty!",
+    "Brush Teeth": "Let's make those teeth sparkle! 🪥",
+    "Brush Your Hair": "Looking good!",
+    "Get Dressed": "You're almost ready!",
+    "Breakfast": "Pancake power! 🥞",
+    "Backpack Check": "Let's make sure you have everything!",
+    "Shoes On": "Almost time to go!",
+    "Story Time": "Let's read together! 📖"
+};
+
 const state = { mode: "", tasks: [], completed: new Set(), currentIndex: 0, lastIndex: -1 };
 
 function storageKey(d = new Date(), mode = state.mode) {
@@ -197,6 +211,10 @@ function renderCurrent(d) {
   juniperImage.src =
     JUNIPER_IMAGES[task.title] ||
     JUNIPER_IMAGES.default;
+
+  el.juniperBubble.textContent =
+    JUNIPER_MESSAGES[task.title] ||
+    JUNIPER_MESSAGES.default;
 
   el.currentTaskIcon.textContent = task.icon;
   el.currentTaskTitle.textContent = task.title;
